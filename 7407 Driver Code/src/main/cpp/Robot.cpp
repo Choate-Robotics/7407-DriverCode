@@ -12,10 +12,10 @@ frc::DifferentialDrive m_RobotDrive(m_left, m_right);
 frc::Joystick m_stick{0};
 frc::DoubleSolenoid m_doubleSolenoid{0,1};
 
-std::bool_constant Logitech_Stick;
+bool Logitech_Stick;
 
 void Robot::RobotInit() {
-  Logitech_Stick = m_stick.GetIsXbox;
+  Logitech_Stick = true; //m_stick.GetIsXbox();
 }
 
 void Robot::RobotPeriodic() {}
@@ -29,7 +29,7 @@ void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic() {
   if(Logitech_Stick == false)
   {
-    m_RobotDrive.TankDrive(m_stick.GetRawAxis(1), m_stick.GetRawAxis(5));
+    m_RobotDrive.TankDrive(m_stick.GetRawAxis(1), m_stick.GetRawAxis(5)); 
   } 
   else {
     m_RobotDrive.ArcadeDrive(m_stick.GetY(), m_stick.GetX());
