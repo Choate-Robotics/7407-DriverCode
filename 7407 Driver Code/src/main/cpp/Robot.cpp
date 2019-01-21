@@ -55,7 +55,7 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic()
 {
-  if (Logitech_Stick == "XboxStick")
+  if (Logitech_Stick != "Logitech Extreme 3D")
   {
     RobotDrive.TankDrive(stick.GetRawAxis(1), stick.GetRawAxis(5));
   }
