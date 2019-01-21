@@ -7,6 +7,7 @@
 #include <frc/PWMVictorSPX.h>
 #include <frc/SpeedControllerGroup.h>
 #include <frc/DoubleSolenoid.h>
+#include <string.h>
 
 frc::PWMVictorSPX leftFront{0};
 frc::PWMVictorSPX leftBack{1};
@@ -23,7 +24,7 @@ frc::DoubleSolenoid solenoid_right{4, 5};
 
 frc::Joystick stick{0};
 
-bool Logitech_Stick;
+std::string Logitech_Stick;
 
 void placeHatch()
 {
@@ -41,7 +42,7 @@ void releaseHatch()
 
 void Robot::RobotInit()
 {
-  Logitech_Stick = true; //stick->GetIsXbox();
+  Logitech_Stick = stick.GetName(); 
 }
 
 void Robot::RobotPeriodic() {}
@@ -54,7 +55,7 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic()
 {
-  if (Logitech_Stick == false)
+  if (Logitech_Stick == "XboxStick")
   {
     RobotDrive.TankDrive(stick.GetRawAxis(1), stick.GetRawAxis(5));
   }
