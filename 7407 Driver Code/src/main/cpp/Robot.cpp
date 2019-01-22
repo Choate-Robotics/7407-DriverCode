@@ -72,12 +72,12 @@ void Robot::TeleopPeriodic()
 {
   if (Logitech_Stick == "Logitech Extreme 3D")
   {
-    RobotDrive.ArcadeDrive(stick.GetY(), stick.GetX());
-    Hatch(5,3);
+    RobotDrive.TankDrive(stick.GetRawAxis(1), stick.GetRawAxis(5));
   }
   else
   {
-    RobotDrive.TankDrive(stick.GetRawAxis(1), stick.GetRawAxis(5));
+    RobotDrive.ArcadeDrive(-stick.GetY(), -stick.GetX());
+    Hatch(5,3);
   }
 }
 
