@@ -17,10 +17,10 @@ frc::PWMTalonSRX rightFront{2};
 frc::PWMTalonSRX rightBack{3};
 */
 
-frc::PWMVictorSPX leftFront{0};
-frc::PWMVictorSPX leftBack{1};
+frc::PWMVictorSPX leftFront{1};
+frc::PWMVictorSPX leftBack{3};
 frc::PWMVictorSPX rightFront{2};
-frc::PWMVictorSPX rightBack{3};
+frc::PWMVictorSPX rightBack{4};
 
 frc::SpeedControllerGroup left{leftFront, leftBack};
 frc::SpeedControllerGroup right{rightFront, rightBack};
