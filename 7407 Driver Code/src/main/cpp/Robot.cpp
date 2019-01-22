@@ -30,7 +30,7 @@ frc::DoubleSolenoid solenoid_top{0, 1};
 frc::DoubleSolenoid solenoid_left{2, 3};
 frc::DoubleSolenoid solenoid_right{4, 5};
 
-frc::Joystick stick{0};
+frc::Joystick stick{2};
 
 std::string Logitech_Stick;
 
@@ -70,9 +70,9 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic()
 {
-  if (Logitech_Stick == "Logitech Extreme 3D")
+  if (Logitech_Stick == "Controller (Gamepad F310)")
   {
-    RobotDrive.TankDrive(stick.GetRawAxis(1), stick.GetRawAxis(5));
+    RobotDrive.TankDrive(-stick.GetRawAxis(1), -stick.GetRawAxis(5));
   }
   else
   {
