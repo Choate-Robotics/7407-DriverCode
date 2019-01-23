@@ -32,9 +32,9 @@ frc::DoubleSolenoid solenoid_right{4, 5};
 
 frc::Joystick stick{2};
 
-std::string Logitech_Stick;
+std::string stick_type;
 
-void Hatch(int button_1, int button_2){
+void operateHatch(int button_1, int button_2){
   if (stick.GetRawButton(button_1))
   {
     solenoid_top.Set(frc::DoubleSolenoid::kForward);
@@ -57,7 +57,7 @@ void Hatch(int button_1, int button_2){
 
 void Robot::RobotInit()
 {
-  Logitech_Stick = stick.GetName(); 
+  stick_type = stick.GetName(); 
 }
 
 void Robot::RobotPeriodic() {}
@@ -70,14 +70,14 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic()
 {
-  if (Logitech_Stick == "Controller (Gamepad F310)")
+  if (stick_type == "Controller (Gamepad F310)")
   {
     RobotDrive.TankDrive(-stick.GetRawAxis(1), -stick.GetRawAxis(5));
   }
   else
   {
     RobotDrive.ArcadeDrive(-stick.GetY(), -stick.GetX());
-    Hatch(5,3);
+    operateHatch(5,3);
   }
 }
 
