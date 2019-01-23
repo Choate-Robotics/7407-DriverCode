@@ -1,7 +1,6 @@
 #include "Robot.h"
 #include <iostream>
 #include <frc/smartdashboard/SmartDashboard.h>
-#include <frc/Timer.h>
 #include <frc/Joystick.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/PWMVictorSPX.h>
@@ -30,30 +29,12 @@ frc::DoubleSolenoid solenoid_top{0, 1};
 frc::DoubleSolenoid solenoid_left{2, 3};
 frc::DoubleSolenoid solenoid_right{4, 5};
 
-frc::Joystick stick{2};
+frc::Joystick stick{0};
 
 std::string Logitech_Stick;
 
-void Hatch(int button_1, int button_2){
-  if (stick.GetRawButton(button_1))
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kForward);
-    solenoid_left.Set(frc::DoubleSolenoid::kForward);
-    solenoid_right.Set(frc::DoubleSolenoid::kForward);
-  }
-  else if (stick.GetRawButton(button_2))
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kForward);
-    solenoid_left.Set(frc::DoubleSolenoid::kForward);
-    solenoid_right.Set(frc::DoubleSolenoid::kForward);
-  }
-  else
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kOff);
-    solenoid_left.Set(frc::DoubleSolenoid::kOff);
-    solenoid_right.Set(frc::DoubleSolenoid::kOff);
-  }
-}
+static constexpr int kDoubleSolenoidForward = 3;
+static constexpr int kDoubleSolenoidReverse = 5;
 
 void Robot::RobotInit()
 {
@@ -70,6 +51,19 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic()
 {
+  if (stick.GetRawButton(kDoubleSolenoidForward)) 
+  {
+    solenoid_top.Set(frc::DoubleSolenoid::kForward);
+  } 
+  else if (stick.GetRawButton(kDoubleSolenoidReverse)) 
+  {
+    solenoid_top.Set(frc::DoubleSolenoid::kReverse);
+  } 
+  else 
+  {
+    solenoid_top.Set(frc::DoubleSolenoid::kOff);
+  }
+  /*
   if (Logitech_Stick == "Controller (Gamepad F310)")
   {
     RobotDrive.TankDrive(-stick.GetRawAxis(1), -stick.GetRawAxis(5));
@@ -77,8 +71,7 @@ void Robot::TeleopPeriodic()
   else
   {
     RobotDrive.ArcadeDrive(-stick.GetY(), -stick.GetX());
-    Hatch(5,3);
-  }
+    */
 }
 
 void Robot::TestPeriodic() {}
