@@ -33,31 +33,8 @@ frc::Joystick stick{0};
 
 std::string stick_type;
 
-<<<<<<< HEAD
 static constexpr int kDoubleSolenoidForward = 3;
 static constexpr int kDoubleSolenoidReverse = 5;
-=======
-void operateHatch(int button_1, int button_2){
-  if (stick.GetRawButton(button_1))
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kForward);
-    solenoid_left.Set(frc::DoubleSolenoid::kForward);
-    solenoid_right.Set(frc::DoubleSolenoid::kForward);
-  }
-  else if (stick.GetRawButton(button_2))
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kForward);
-    solenoid_left.Set(frc::DoubleSolenoid::kForward);
-    solenoid_right.Set(frc::DoubleSolenoid::kForward);
-  }
-  else
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kOff);
-    solenoid_left.Set(frc::DoubleSolenoid::kOff);
-    solenoid_right.Set(frc::DoubleSolenoid::kOff);
-  }
-}
->>>>>>> 588027d8586dde6f71fedb1c0ad317fe6d60e3fa
 
 void Robot::RobotInit()
 {
@@ -74,7 +51,6 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic()
 {
-<<<<<<< HEAD
   if (stick.GetRawButton(kDoubleSolenoidForward)) 
   {
     solenoid_top.Set(frc::DoubleSolenoid::kForward);
@@ -89,21 +65,13 @@ void Robot::TeleopPeriodic()
   }
   /*
   if (Logitech_Stick == "Controller (Gamepad F310)")
-=======
-  if (stick_type == "Controller (Gamepad F310)")
->>>>>>> 588027d8586dde6f71fedb1c0ad317fe6d60e3fa
   {
     RobotDrive.TankDrive(-stick.GetRawAxis(1), -stick.GetRawAxis(5));
   }
   else
   {
     RobotDrive.ArcadeDrive(-stick.GetY(), -stick.GetX());
-<<<<<<< HEAD
     */
-=======
-    operateHatch(5,3);
-  }
->>>>>>> 588027d8586dde6f71fedb1c0ad317fe6d60e3fa
 }
 
 void Robot::TestPeriodic() {}
