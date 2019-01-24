@@ -63,15 +63,15 @@ void Robot::TeleopPeriodic()
   {
     solenoid_top.Set(frc::DoubleSolenoid::kOff);
   }
-  /*
-  if (Logitech_Stick == "Controller (Gamepad F310)")
+  
+  if (stick_type == "Controller (Gamepad F310)")
   {
     RobotDrive.TankDrive(-stick.GetRawAxis(1), -stick.GetRawAxis(5));
   }
   else
   {
     RobotDrive.ArcadeDrive(-stick.GetY(), -stick.GetX());
-    */
+  }
 }
 
 void Robot::TestPeriodic() {}
