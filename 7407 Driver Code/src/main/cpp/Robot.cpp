@@ -33,12 +33,12 @@ frc::Joystick stick{0};
 
 std::string stick_type;
 
-static constexpr int kDoubleSolenoidForward;
-static constexpr int kDoubleSolenoidReverse;
+static constexpr int kDoubleSolenoidForward = 5;
+static constexpr int kDoubleSolenoidReverse = 6;
 
 void drive()
 {
-  if (stick_type == "Controller (Gamepad F310)")
+  if (stick_type == "Controller (Gamepad F310)" or "4 axis 12 button joystick with hat switch")
   {
     RobotDrive.TankDrive(-stick.GetRawAxis(1), -stick.GetRawAxis(5));
   }
@@ -71,21 +71,10 @@ void operateHatch()
   }
 }
 
+
 void Robot::RobotInit()
 {
   stick_type = stick.GetName();
-
-  if (stick_type == "Controller (Gamepad F310)")
-  {
-    static constexpr int kDoubleSolenoidForward = 9;
-    static constexpr int kDoubleSolenoidReverse = 6;
-  }
-  else
-  {
-    static constexpr int kDoubleSolenoidForward = 5;
-    static constexpr int kDoubleSolenoidReverse = 3;
-  }
-  
 }
 
 void Robot::RobotPeriodic() {}
@@ -98,8 +87,8 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic()
 {
-  operateHatch();
   drive();
+  operateHatch();
 }
 
 void Robot::TestPeriodic() {}
