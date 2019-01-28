@@ -33,12 +33,59 @@ frc::Joystick stick{0};
 
 std::string stick_type;
 
-static constexpr int kDoubleSolenoidForward = 5;
-static constexpr int kDoubleSolenoidReverse = 3;
+static constexpr int kDoubleSolenoidForward;
+static constexpr int kDoubleSolenoidReverse;
+
+void drive()
+{
+  if (stick_type == "Controller (Gamepad F310)")
+  {
+    RobotDrive.TankDrive(-stick.GetRawAxis(1), -stick.GetRawAxis(5));
+  }
+  else
+  {
+    RobotDrive.ArcadeDrive(-stick.GetY(), -stick.GetX());
+  }
+}
+
+void operateHatch()
+{
+  if (stick.GetRawButton(kDoubleSolenoidForward))
+  {
+    solenoid_top.Set(frc::DoubleSolenoid::kForward);
+    solenoid_left.Set(frc::DoubleSolenoid::kForward);
+    solenoid_right.Set(frc::DoubleSolenoid::kForward);
+    std::cout << "Solenoid out" << "\n";
+  }
+  else if (stick.GetRawButton(kDoubleSolenoidReverse))
+  {
+    solenoid_top.Set(frc::DoubleSolenoid::kReverse);
+    solenoid_left.Set(frc::DoubleSolenoid::kReverse);
+    solenoid_right.Set(frc::DoubleSolenoid::kReverse);
+  }
+  else
+  {
+    solenoid_top.Set(frc::DoubleSolenoid::kOff);
+    solenoid_left.Set(frc::DoubleSolenoid::kOff);
+    solenoid_right.Set(frc::DoubleSolenoid::kOff);
+  }
+}
 
 void Robot::RobotInit()
 {
-  stick_type = stick.GetName(); 
+  stick_type = stick.GetName();
+
+  if (stick_type == "Controller (Gamepad F310)")
+  {
+    static constexpr int kDoubleSolenoidForward = 9;
+    static constexpr int kDoubleSolenoidReverse = 6;
+  }
+  else
+  {
+    static constexpr int kDoubleSolenoidForward = 5;
+    static constexpr int kDoubleSolenoidReverse = 3;
+  }
+  
 }
 
 void Robot::RobotPeriodic() {}
@@ -51,33 +98,8 @@ void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic()
 {
-  if (stick.GetRawButton(kDoubleSolenoidForward)) 
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kForward);
-    solenoid_left.Set(frc::DoubleSolenoid::kForward);
-    solenoid_right.Set(frc::DoubleSolenoid::kForward);
-  } 
-  else if (stick.GetRawButton(kDoubleSolenoidReverse)) 
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kReverse);
-    solenoid_left.Set(frc::DoubleSolenoid::kReverse);
-    solenoid_right.Set(frc::DoubleSolenoid::kReverse);
-  } 
-  else 
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kOff);
-    solenoid_left.Set(frc::DoubleSolenoid::kOff);
-    solenoid_right.Set(frc::DoubleSolenoid::kOff);
-  }
-  
-  if (stick_type == "Controller (Gamepad F310)")
-  {
-    RobotDrive.TankDrive(-stick.GetRawAxis(1), -stick.GetRawAxis(5));
-  }
-  else
-  {
-    RobotDrive.ArcadeDrive(-stick.GetY(), -stick.GetX());
-  }
+  operateHatch();
+  drive();
 }
 
 void Robot::TestPeriodic() {}
