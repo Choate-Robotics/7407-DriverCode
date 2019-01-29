@@ -21,10 +21,10 @@ frc::PWMVictorSPX leftBack{3};
 frc::PWMVictorSPX rightFront{2};
 frc::PWMVictorSPX rightBack{4};
 
-frc::PWMVictorSPX conveyor{5};
-frc::PWMVictorSPX intakeLeft{6};
-frc::PWMVictorSPX intakeRight{7};
-frc::PWMVictorSPX intakeAngle{8};
+frc::PWMVictorSPX conveyorMotor{5};
+frc::PWMVictorSPX intakeMotor{6};
+frc::PWMVictorSPX intakeAngle{7};
+frc::PWMVictorSPX extakeAngle{8};
 frc::PWMVictorSPX extakeRight{9};
 frc::PWMVictorSPX extakeLeft{0};
 
@@ -32,7 +32,6 @@ frc::SpeedControllerGroup left{leftFront, leftBack};
 frc::SpeedControllerGroup right{rightFront, rightBack};
 frc::DifferentialDrive RobotDrive(left, right);
 
-frc::SpeedControllerGroup intake{intakeLeft, intakeRight};
 frc::SpeedControllerGroup extake{extakeLeft, extakeRight};
 
 frc::DoubleSolenoid solenoid_top{0, 1};
@@ -58,7 +57,63 @@ void drive()
   }
 }
 
-void operateHatch()
+void intakeCargo()
+{
+  intakeMotor.Set(.5);
+  conveyorMotor.Set(.5);
+}
+
+void extakeCargo()
+{
+  extake.Set(.5);
+  conveyorMotor.Set(.5);
+}
+
+void angleIntake()
+{
+  if (stick.GetRawButton(10))
+  {
+    intakeAngle.Set(.5);
+  }
+  else if (stick.GetRawButton(11))
+  {
+    intakeAngle.Set(-.5);
+  }
+  else if (stick.GetRawButton(12))
+  {
+    intakeAngle.Set(0);
+  }
+}
+
+void angleExtake()
+{
+  if (stick.GetRawButton(13))
+  {
+    extakeAngle.Set(.5);
+  }
+  else if (stick.GetRawButton(14))
+  {
+    extakeAngle.Set(-.5);
+  }
+  else if (stick.GetRawButton(15))
+  {
+    extakeAngle.Set(0);
+  }
+}
+
+void runIntake() 
+{
+  intakeCargo();
+  angleIntake();
+}
+
+void runExtake()
+{
+  extakeCargo();
+  angleExtake();
+}
+
+void runHatch()
 {
   if (stick.GetRawButton(kDoubleSolenoidForward))
   {
@@ -81,7 +136,6 @@ void operateHatch()
   }
 }
 
-
 void Robot::RobotInit()
 {
   stick_type = stick.GetName();
@@ -98,7 +152,9 @@ void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic()
 {
   drive();
-  operateHatch();
+  runHatch();
+  runIntake();
+  runExtake();
 }
 
 void Robot::TestPeriodic() {}
