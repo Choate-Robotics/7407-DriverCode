@@ -21,9 +21,19 @@ frc::PWMVictorSPX leftBack{3};
 frc::PWMVictorSPX rightFront{2};
 frc::PWMVictorSPX rightBack{4};
 
+frc::PWMVictorSPX conveyor{5};
+frc::PWMVictorSPX intakeLeft{6};
+frc::PWMVictorSPX intakeRight{7};
+frc::PWMVictorSPX intakeAngle{8};
+frc::PWMVictorSPX extakeRight{9};
+frc::PWMVictorSPX extakeLeft{0};
+
 frc::SpeedControllerGroup left{leftFront, leftBack};
 frc::SpeedControllerGroup right{rightFront, rightBack};
 frc::DifferentialDrive RobotDrive(left, right);
+
+frc::SpeedControllerGroup intake{intakeLeft, intakeRight};
+frc::SpeedControllerGroup extake{extakeLeft, extakeRight};
 
 frc::DoubleSolenoid solenoid_top{0, 1};
 frc::DoubleSolenoid solenoid_left{2, 3};
@@ -74,18 +84,6 @@ void operateHatch()
 void Robot::RobotInit()
 {
   stick_type = stick.GetName();
-
-  if (stick_type == "Controller (Gamepad F310)")
-  {
-    static constexpr int kDoubleSolenoidForward = 9;
-    static constexpr int kDoubleSolenoidReverse = 6;
-  }
-  else
-  {
-    static constexpr int kDoubleSolenoidForward = 5;
-    static constexpr int kDoubleSolenoidReverse = 3;
-  }
-  
 }
 
 void Robot::RobotPeriodic() {}
