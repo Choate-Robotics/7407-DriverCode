@@ -16,17 +16,17 @@ frc::PWMTalonSRX rightFront{2};
 frc::PWMTalonSRX rightBack{3};
 */
 
-frc::PWMVictorSPX leftFront{1};
-frc::PWMVictorSPX leftBack{3};
-frc::PWMVictorSPX rightFront{2};
-frc::PWMVictorSPX rightBack{4};
+frc::PWMVictorSPX leftFront{0};
+frc::PWMVictorSPX leftBack{2};
+frc::PWMVictorSPX rightFront{1};
+frc::PWMVictorSPX rightBack{3};
 
-frc::PWMVictorSPX conveyorMotor{5};
-frc::PWMVictorSPX intakeMotor{6};
-frc::PWMVictorSPX intakeAngle{7};
-frc::PWMVictorSPX extakeAngle{8};
-frc::PWMVictorSPX extakeRight{9};
-frc::PWMVictorSPX extakeLeft{0};
+frc::PWMVictorSPX conveyorMotor{4};
+frc::PWMVictorSPX intakeMotor{5};
+frc::PWMVictorSPX intakeAngle{6};
+frc::PWMVictorSPX extakeAngle{7};
+frc::PWMVictorSPX extakeRight{8};
+frc::PWMVictorSPX extakeLeft{9};
 
 frc::SpeedControllerGroup left{leftFront, leftBack};
 frc::SpeedControllerGroup right{rightFront, rightBack};
@@ -59,27 +59,51 @@ void drive()
 
 void intakeCargo()
 {
-  intakeMotor.Set(.5);
-  conveyorMotor.Set(.5);
+  if(stick.GetRawButton(3))
+  {
+    intakeMotor.Set(.5);
+  }
+  else if(stick.GetRawButton(5))
+  {
+    intakeMotor.Set(0);
+  }
+}
+
+void carryCargo()
+{
+  if(stick.GetRawButton(1))
+  {
+    conveyorMotor.Set(.5);
+  }
+  else if(stick.GetRawButton(2))
+  {
+    conveyorMotor.Set(0);
+  }
 }
 
 void extakeCargo()
 {
-  extake.Set(.5);
-  conveyorMotor.Set(.5);
+  if(stick.GetRawButton(4))
+  {
+    intakeMotor.Set(.5);
+  }
+  else if(stick.GetRawButton(6))
+  {
+    intakeMotor.Set(0);
+  }
 }
 
 void angleIntake()
 {
-  if (stick.GetRawButton(10))
+  if (stick.GetRawButton(11))
   {
     intakeAngle.Set(.5);
   }
-  else if (stick.GetRawButton(11))
+  else if (stick.GetRawButton(7))
   {
     intakeAngle.Set(-.5);
   }
-  else if (stick.GetRawButton(12))
+  else if (stick.GetRawButton(9))
   {
     intakeAngle.Set(0);
   }
@@ -87,15 +111,15 @@ void angleIntake()
 
 void angleExtake()
 {
-  if (stick.GetRawButton(13))
+  if (stick.GetRawButton(12))
   {
     extakeAngle.Set(.5);
   }
-  else if (stick.GetRawButton(14))
+  else if (stick.GetRawButton(8))
   {
     extakeAngle.Set(-.5);
   }
-  else if (stick.GetRawButton(15))
+  else if (stick.GetRawButton(10))
   {
     extakeAngle.Set(0);
   }
@@ -115,18 +139,19 @@ void runExtake()
 
 void runHatch()
 {
-  if (stick.GetRawButton(kDoubleSolenoidForward))
+  if (stick.GetPOV() == 0)
   {
     solenoid_top.Set(frc::DoubleSolenoid::kForward);
     solenoid_left.Set(frc::DoubleSolenoid::kForward);
-    solenoid_right.Set(frc::DoubleSolenoid::kForward);
-    std::cout << "Solenoid out" << "\n";
+    solenoid_right.Set(frc::DoubleSolenoid::kForward); 
+    std::cout << "out" << "\n";
   }
-  else if (stick.GetRawButton(kDoubleSolenoidReverse))
+  else if (stick.GetPOV() == 180)
   {
     solenoid_top.Set(frc::DoubleSolenoid::kReverse);
     solenoid_left.Set(frc::DoubleSolenoid::kReverse);
     solenoid_right.Set(frc::DoubleSolenoid::kReverse);
+    std::cout << "in" << "\n";
   }
   else
   {
