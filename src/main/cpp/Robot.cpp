@@ -31,16 +31,16 @@ frc::DoubleSolenoid solenoid_top{1, 0};
 frc::DoubleSolenoid solenoid_left{2, 3};
 frc::DoubleSolenoid solenoid_right{4, 5};
 
-frc::Joystick drive_stick{2};
-frc::Joystick mech_stick{1};
+frc::Joystick drive_stick{3};
+frc::Joystick mech_stick{4};
 
 int extakeOut = 8;
 int extakeIn = 7;
 int intakeOut = 8;
 int intakeIn = 7;
 int intakeToggle = 2;
-int extakeHigh = 6;
-int extakeLow = 5;
+int extakeHigh = 5;
+int extakeLow = 6;
 
 std::string stick_type;
 
@@ -49,13 +49,15 @@ static constexpr int kDoubleSolenoidReverse = 5;
 
 bool intakeRunning = false;
 bool intakeButtonAllow = true;
-bool extakeRunning = false;
-bool extakeButtonAllow = true;
+bool extakeHighRunning = false;
+bool extakeHighButtonAllow = true;
+bool extakeLowRunning = false;
+bool extakeLowButtonAllow = true;
 
 void drive()
 {
 
- RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(4)*.70);
+ RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2)*.70);
 
 }
 
@@ -66,7 +68,7 @@ void intakeCargo()
     if(intakeButtonAllow == true)
     {
       intakeMotor.Set(.5);
-      intakeRunning = false;
+      intakeRunning = true;
       intakeButtonAllow = false;
     }
   }
@@ -75,7 +77,7 @@ void intakeCargo()
     if(intakeButtonAllow == true)
     {
       intakeMotor.Set(0);
-      intakeRunning = true;
+      intakeRunning = false;
       intakeButtonAllow = false;
     }
   }
@@ -90,31 +92,60 @@ void carryCargo()
   conveyorMotor.Set(mech_stick.GetRawAxis(3));
 }
 
-void extakeCargo(int power, int button)
+void extakeCargo()
 {
-  if (mech_stick.GetRawButton(button) && extakeRunning == false)
+  if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning == false)
   {
-    if (extakeButtonAllow == true)
+    if (extakeLowButtonAllow == true)
     {
-      extakeLeft.Set(power);
-      extakeRight.Set(-power);
-      extakeRunning = true;
-      extakeButtonAllow = false;
+      extakeLeft.Set(.25);
+      extakeRight.Set(-.25);
+      extakeLowRunning = true;
+      extakeLowButtonAllow = false;
+      std::cout << "low on" << "\n";
     }
   }
-  else if (mech_stick.GetRawButton(button) && extakeRunning == true)
+  else if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning == true)
   {
-    if (extakeButtonAllow == true)
+    if (extakeLowButtonAllow == true)
     {
       extakeLeft.Set(0);
       extakeRight.Set(0);
-      extakeRunning = false;
-      extakeButtonAllow = false;
+      extakeLowRunning = false;
+      extakeLowButtonAllow = false;
+      std::cout << "low off" << "\n";
     }
   }
   else
   {
-    extakeButtonAllow = true;
+    extakeLowButtonAllow = true;
+  }
+
+  if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning == false)
+  {
+    if (extakeHighButtonAllow == true)
+    {
+      extakeLeft.Set(.5);
+      extakeRight.Set(-.5);
+      extakeHighRunning = true;
+      extakeHighButtonAllow = false;
+      std::cout << "high on" << "\n";
+    }
+  }
+  else if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning == true)
+  {
+    if (extakeHighButtonAllow == true)
+    {
+      extakeLeft.Set(0);
+      extakeRight.Set(0);
+      extakeHighRunning = false;
+      extakeHighButtonAllow = false;
+      std::cout << "high off" << "\n";
+    }
+  }
+  else
+  {
+    extakeHighButtonAllow = true;
   }
 }
 /*void extakeCargo()
@@ -156,11 +187,11 @@ void angleExtake()
 {
   while (mech_stick.GetRawButton(extakeOut))
   {
-    extakeAngle.Set(.25);
+    extakeAngle.Set(.3);
   }
   while (mech_stick.GetRawButton(extakeIn))
   {
-    extakeAngle.Set(-.25);
+    extakeAngle.Set(-.3);
   }
     
   extakeAngle.Set(0);
@@ -170,14 +201,14 @@ void angleIntake()
 {
   while (drive_stick.GetRawButton(intakeOut))
   {
-    intakeAngle.Set(.25);
+    intakeAngle.Set(.5);
   }
   while (drive_stick.GetRawButton(intakeIn))
   {
-    intakeAngle.Set(-.25);
+    intakeAngle.Set(-.4);
   }
-    
-  intakeAngle.Set(0);
+  
+  intakeAngle.Set(.25);
 }
 
 void runIntake() 
@@ -189,8 +220,7 @@ void runIntake()
 
 void runExtake()
 {
-  extakeCargo(.25, extakeLow);
-  extakeCargo(.75, extakeHigh);
+  extakeCargo();
   angleExtake();
 }
 
