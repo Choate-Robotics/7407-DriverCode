@@ -40,7 +40,7 @@ frc::DifferentialDrive RobotDrive(left, right);
 
 frc::SpeedControllerGroup extake{extakeLeft, extakeRight};
 
-frc::DoubleSolenoid solenoid_top{0, 1};
+frc::DoubleSolenoid solenoid_top{1, 0};
 frc::DoubleSolenoid solenoid_left{2, 3};
 frc::DoubleSolenoid solenoid_right{4, 5};
 
@@ -59,7 +59,7 @@ bool extakeButtonAllow = true;
 void drive()
 {
 
- RobotDrive.TankDrive(-stick.GetRawAxis(1), -stick.GetRawAxis(5));
+ RobotDrive.ArcadeDrive(-stick.GetRawAxis(1), stick.GetRawAxis(4)*.70);
 
 }
 
