@@ -208,7 +208,7 @@ void angleIntake()
     intakeAngle.Set(-.4);
   }
   
-  intakeAngle.Set(.25);
+  intakeAngle.Set(-.05);
 }
 
 void runIntake() 
