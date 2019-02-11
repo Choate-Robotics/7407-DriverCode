@@ -16,17 +16,17 @@ namespace RobotMap
 {
 namespace port
 {
-static constexpr int FrontLeft = 0;
-static constexpr int FrontRight = 1;
-static constexpr int BackLeft = 2;
-static constexpr int BackRight = 3;
+static constexpr int frontLeft = 0;
+static constexpr int frontRight = 1;
+static constexpr int backLeft = 2;
+static constexpr int backRight = 3;
 
-static constexpr int Conveyor = 4;
-static constexpr int Intake = 5;
-static constexpr int TiltIn = 6;
-static constexpr int TiltOut = 7;
-static constexpr int OutRight = 8;
-static constexpr int OutLeft = 9;
+static constexpr int conveyor = 4;
+static constexpr int intake = 5;
+static constexpr int tiltIn = 6;
+static constexpr int tiltOut = 7;
+static constexpr int outRight = 8;
+static constexpr int outLeft = 9;
 } // namespace port
 
 #if CURRENT_DRIVER == ALEX_AND_PETER
