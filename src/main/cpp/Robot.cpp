@@ -10,18 +10,24 @@
 
 OI *Robot::oi = new OI;
 
-void RobotInit()
+void Robot::RobotInit()
 {
-    subsystem::Conveyor *conveyor = new subsystem::Conveyor;
-    subsystem::Extake *extake = new subsystem::Extake;
-    subsystem::Drivetrain *drivetrain = new subsystem::Drivetrain;
-    subsystem::Intake *intake = new subsystem::Intake;
-    subsystem::HatchPanel *hatchPanel = new subsystem::HatchPanel;
+    using namespace RobotMap;
+    this->conveyor = new subsystem::Conveyor("Conveyor");
+    this->extake = new subsystem::Extake("Extake");
+    this->drivetrain = new subsystem::Drivetrain("Drivetrain");
+    this->intake = new subsystem::Intake("Intake");
+    this->hatchPanel = new subsystem::HatchPanel("Hatch Panel");
+    
 }
 
-void RobotPeriodic(){}
+void RobotPeriodic(){
+    frc::Scheduler::GetInstance()->Run();
+}
 void AutonomousInit(){}
-void AutonomousPeriodic(){}
+void AutonomousPeriodic(){
+    frc::Scheduler::GetInstance()->Run();
+}
 void TeleopInit(){}
 void TeleopPeriodic(){
     frc::Scheduler::GetInstance()->Run();

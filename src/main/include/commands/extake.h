@@ -5,7 +5,7 @@
 namespace command
 {
 
-class IntakeIn : public frc::Command
+class ExtakeIn : public frc::Command
 {
   public:
     void Initialize() override;
@@ -15,7 +15,7 @@ class IntakeIn : public frc::Command
     void Interrupted() override;
 };
 
-class IntakeOut : public frc::Command
+class ExtakeOut : public frc::Command
 {
   public:
     void Initialize() override;
@@ -25,7 +25,7 @@ class IntakeOut : public frc::Command
     void Interrupted() override;
 };
 
-class IntakeToggle : public frc::Command
+class ExtakeTiltUp : public frc::Command
 {
   public:
     void Initialize() override;
@@ -35,17 +35,7 @@ class IntakeToggle : public frc::Command
     void Interrupted() override;
 };
 
-class IntakeTiltUp : public frc::Command
-{
-  public:
-    void Initialize() override;
-    void Execute() override;
-    bool IsFinished() override;
-    void End() override;
-    void Interrupted() override;
-};
-
-class IntakeTiltDown : public frc::Command
+class ExtakeTiltDown : public frc::Command
 {
   public:
     void Initialize() override;

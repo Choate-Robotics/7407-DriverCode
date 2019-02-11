@@ -1,12 +1,17 @@
 #pragma once
 
 #include <frc/TimedRobot.h>
+#include <frc/drive/DifferentialDrive.h>
+#include <frc/PWMVictorSPX.h>
+#include <frc/PWMTalonSRX.h>
+
 #include "OI.h"
 #include "subsystems/conveyor.h"
 #include "subsystems/drivetrain.h"
 #include "subsystems/hatchPanel.h"
 #include "subsystems/intake.h"
 #include "subsystems/extake.h"
+
 
 class Robot : public frc::TimedRobot
 {
@@ -24,6 +29,5 @@ public:
   static subsystem::Drivetrain *drivetrain;
   static subsystem::Intake *intake;
   static subsystem::HatchPanel *hatchPanel;
-  static subsystem::Extake *extake;
-
+  static subsystem::Extake *extake; 
 };

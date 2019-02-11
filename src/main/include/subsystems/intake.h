@@ -1,12 +1,13 @@
 #pragma once
 
 #include <frc/commands/Subsystem.h>
+#include <wpi/Twine.h>
 
 namespace subsystem{
 
 class Intake: public frc::Subsystem {
 public:
-    Intake();
+    Intake(const wpi::Twine);
     void InitDefaultCommand() override;
     void in();
     void out();
