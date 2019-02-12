@@ -4,7 +4,7 @@
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/PWMVictorSPX.h>
 #include <frc/PWMTalonSRX.h>
-#include <DoubleSolenoid.h>
+#include <frc/DoubleSolenoid.h>
 
 #define ALEX_AND_PETER 1
 #define BELLA_AND_KNUTE 2
@@ -25,17 +25,17 @@ namespace RobotMap
 namespace motor
 {
 
-static const frc::PWMTalonSRX frontLeft = frc::PWMTalonSRX{0};
-static const frc::PWMTalonSRX frontRight = frc::PWMTalonSRX{1};
-static const frc::PWMTalonSRX backLeft = frc::PWMTalonSRX{2};
-static const frc::PWMTalonSRX backRight = frc::PWMTalonSRX{3};
+static frc::PWMTalonSRX frontLeft = frc::PWMTalonSRX{0};
+static frc::PWMTalonSRX frontRight = frc::PWMTalonSRX{1};
+static frc::PWMTalonSRX backLeft = frc::PWMTalonSRX{2};
+static frc::PWMTalonSRX backRight = frc::PWMTalonSRX{3};
 
-static const frc::PWMVictorSPX conveyor = frc::PWMVictorSPX{4};
-static const frc::PWMVictorSPX intake = frc::PWMVictorSPX{5};
-static const frc::PWMVictorSPX intakeTilt = frc::PWMVictorSPX{6};
-static const frc::PWMVictorSPX extakeTilt = frc::PWMVictorSPX{7};
-static const frc::PWMVictorSPX extakeLeft = frc::PWMVictorSPX{8};
-static const frc::PWMVictorSPX extakeRight = frc::PWMVictorSPX{9};
+static frc::PWMVictorSPX conveyor = frc::PWMVictorSPX{4};
+static frc::PWMVictorSPX intake = frc::PWMVictorSPX{5};
+static frc::PWMVictorSPX intakeTilt = frc::PWMVictorSPX{6};
+static frc::PWMVictorSPX extakeTilt = frc::PWMVictorSPX{7};
+static frc::PWMVictorSPX extakeLeft = frc::PWMVictorSPX{8};
+static frc::PWMVictorSPX extakeRight = frc::PWMVictorSPX{9};
 
 static constexpr int solenoidTop[2] = {1, 0};
 static constexpr int solenoidLeft[2] = {2, 3};
