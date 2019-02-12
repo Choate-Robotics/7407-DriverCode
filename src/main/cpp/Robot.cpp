@@ -18,7 +18,6 @@ void Robot::RobotInit()
     this->drivetrain = new subsystem::Drivetrain("Drivetrain");
     this->intake = new subsystem::Intake("Intake");
     this->hatchPanel = new subsystem::HatchPanel("Hatch Panel");
-    
 }
 
 void RobotPeriodic(){
