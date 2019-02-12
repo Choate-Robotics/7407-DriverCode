@@ -20,15 +20,15 @@ void Robot::RobotInit()
     this->hatchPanel = new subsystem::HatchPanel("Hatch Panel");
 }
 
-void RobotPeriodic(){
+void Robot::RobotPeriodic(){
     frc::Scheduler::GetInstance()->Run();
 }
-void AutonomousInit(){}
-void AutonomousPeriodic(){
+void Robot::AutonomousInit(){}
+void Robot::AutonomousPeriodic(){
     frc::Scheduler::GetInstance()->Run();
 }
-void TeleopInit(){}
-void TeleopPeriodic(){
+void Robot::TeleopInit(){}
+void Robot::TeleopPeriodic(){
     frc::Scheduler::GetInstance()->Run();
 }
-void TestPeriodic(){}
+void Robot::TestPeriodic(){}

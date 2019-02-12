@@ -37,16 +37,13 @@ static frc::PWMVictorSPX extakeTilt = frc::PWMVictorSPX{7};
 static frc::PWMVictorSPX extakeLeft = frc::PWMVictorSPX{8};
 static frc::PWMVictorSPX extakeRight = frc::PWMVictorSPX{9};
 
-static constexpr int solenoidTop[2] = {1, 0};
-static constexpr int solenoidLeft[2] = {2, 3};
-static constexpr int solenoidRight[2] = {4, 5};
 } // namespace motor
 
 namespace solenoid
 {
-static const frc::DoubleSolenoid top = frc::DoubleSolenoid{1, 0};
-static const frc::DoubleSolenoid left = frc::DoubleSolenoid{2, 3};
-static const frc::DoubleSolenoid right = frc::DoubleSolenoid{4, 5};
+static frc::DoubleSolenoid top = frc::DoubleSolenoid{1, 0};
+static frc::DoubleSolenoid left = frc::DoubleSolenoid{2, 3};
+static frc::DoubleSolenoid right = frc::DoubleSolenoid{4, 5};
 } // namespace solenoid
 
 #if CURRENT_DRIVER == ALEX_AND_PETER

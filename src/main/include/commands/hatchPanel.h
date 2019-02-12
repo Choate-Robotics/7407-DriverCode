@@ -7,6 +7,7 @@ namespace command
 class hatchPanelIn : public frc::Command
 {
   public:
+    hatchPanelIn();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
@@ -17,6 +18,7 @@ class hatchPanelIn : public frc::Command
 class hatchPanelOut : public frc::Command
 {
   public:
+    hatchPanelOut();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
