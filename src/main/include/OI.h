@@ -7,15 +7,15 @@ class OI{
 
 public:
     OI();
-    frc::Joystick * joystick[2];
-    frc::JoystickButton *buttonIntakeToggle;
-    frc::JoystickButton *buttonIntakeTiltDown;
-    frc::JoystickButton *buttonIntakeTiltUp;
+    static frc::Joystick * joystick[2];
+    static frc::JoystickButton *buttonIntakeToggle;
+    static frc::JoystickButton *buttonIntakeTiltDown;
+    static frc::JoystickButton *buttonIntakeTiltUp;
 
-    frc::JoystickButton *buttonExtakeHigh;
-    frc::JoystickButton *buttonExtakeLow;
-    frc::JoystickButton *buttonExtakeTiltUp;
-    frc::JoystickButton *buttonExtakeTiltDown;
-    frc::JoystickButton *buttonSolenoidsOut;
-    frc::JoystickButton *buttonSolenoidsIn;
+    static frc::JoystickButton *buttonExtakeHigh;
+    static frc::JoystickButton *buttonExtakeLow;
+    static frc::JoystickButton *buttonExtakeTiltUp;
+    static frc::JoystickButton *buttonExtakeTiltDown;
+    static frc::JoystickButton *buttonSolenoidsOut;
+    static frc::JoystickButton *buttonSolenoidsIn;
 };

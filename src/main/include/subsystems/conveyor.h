@@ -10,8 +10,6 @@ class Conveyor: public frc::Subsystem{
 public:
     Conveyor(const wpi::Twine&);
     void InitDefaultCommand() override;
-    void forward();
-    void reverse();
-    void stop(); 
+    void move();
 };
 }
