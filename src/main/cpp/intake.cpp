@@ -71,11 +71,11 @@ void command::IntakeStop::End() {}
 void command::IntakeStop::Interrupted() {}
 
 
-void command::IntakeStop::Initialize(){Robot::intake->toggle();}
-void command::IntakeStop::Execute() {}
-bool command::IntakeStop::IsFinished() { return true; }
-void command::IntakeStop::End() {}
-void command::IntakeStop::Interrupted() {}
+void command::IntakeToggle::Initialize(){Robot::intake->toggle();}
+void command::IntakeToggle::Execute() {}
+bool command::IntakeToggle::IsFinished() { return true; }
+void command::IntakeToggle::End() {}
+void command::IntakeToggle::Interrupted() {}
 
 void command::IntakeTiltUp::Initialize(){Robot::intake->tiltUp();}
 void command::IntakeTiltUp::Execute() {}
