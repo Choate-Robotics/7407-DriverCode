@@ -17,6 +17,12 @@ OI::OI()
     frc::JoystickButton *buttonIntake = new frc::JoystickButton(joystick[joystick::intake], keymap::button::intakeToggle);
     frc::JoystickButton *buttonExtakeHigh = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeHigh);
     frc::JoystickButton *buttonExtakeLow = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeLow);
+    frc::JoystickButton *buttonIntakeTiltUp = new frc::JoystickButton(joystick[joystick::intake], keymap::button::intakeTiltUp);
+    frc::JoystickButton *buttonIntakeTiltDown = new frc::JoystickButton(joystick[joystick::intake], keymap::button::intakeTiltDown);
+    frc::JoystickButton *buttonExtakeTiltUp = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeTiltUp);
+    frc::JoystickButton *buttonExtakeTiltDown = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeTiltDown);
+    frc::JoystickButton *buttonSolenoidsOut = new frc::JoystickButton(joystick[joystick::extake], keymap::button::hatchPanelOut);
+    frc::JoystickButton *buttonSolenoidsIn = new frc::JoystickButton(joystick[joystick::extake], keymap::button::hatchPanelIn);
 
     buttonIntake->WhenPressed(new command::IntakeToggle);
 }

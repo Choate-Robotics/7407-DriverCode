@@ -70,12 +70,12 @@ namespace keymap
 {
 namespace button
 {
-static constexpr int extakeTitlDown = 7;
-static constexpr int extakeTitlUp = 8;
+static constexpr int extakeTiltDown = 7;
+static constexpr int extakeTiltUp = 8;
 static constexpr int extakeHigh = 5;
 static constexpr int extakeLow = 6;
-static constexpr int intakeTitlDown = 8;
-static constexpr int intakeTitlUp = 7;
+static constexpr int intakeTiltDown = 8;
+static constexpr int intakeTiltUp = 7;
 static constexpr int intakeToggle = 2;
 static constexpr int hatchPanelIn = 5;
 static constexpr int hatchPanelOut = 6;
