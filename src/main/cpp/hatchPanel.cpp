@@ -19,7 +19,7 @@ void subsystem::HatchPanel::in(){
 command::hatchPanelIn::hatchPanelIn():frc::Command::Command(*Robot::hatchPanel){}
 command::hatchPanelOut::hatchPanelOut():frc::Command::Command(*Robot::hatchPanel){}
 
-void subsystem::Conveyor::InitDefaultCommand(){}
+void subsystem::HatchPanel::InitDefaultCommand(){}
 
 void command::hatchPanelIn::Initialize(){}
 void command::hatchPanelIn::Execute(){

@@ -12,7 +12,6 @@
 #include "subsystems/intake.h"
 #include "subsystems/extake.h"
 
-
 class Robot : public frc::TimedRobot
 {
 
