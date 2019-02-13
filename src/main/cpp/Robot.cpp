@@ -8,11 +8,16 @@
 #include <frc/SpeedControllerGroup.h>
 #include <frc/DoubleSolenoid.h>
 #include <string.h>
-
+/*
 frc::PWMTalonSRX leftFront{0};
 frc::PWMTalonSRX leftBack{2};
 frc::PWMTalonSRX rightFront{1};
-frc::PWMTalonSRX rightBack{3};
+frc::PWMTalonSRX rightBack{3};*/
+
+frc::PWMVictorSPX leftFront{0};
+frc::PWMVictorSPX leftBack{2};
+frc::PWMVictorSPX rightFront{1};
+frc::PWMVictorSPX rightBack{3};
 
 frc::PWMVictorSPX conveyorMotor{4};
 frc::PWMVictorSPX intakeMotor{5};
@@ -42,8 +47,6 @@ int intakeToggle = 2;
 int extakeHigh = 5;
 int extakeLow = 6;
 
-std::string stick_type;
-
 static constexpr int kDoubleSolenoidForward = 6;
 static constexpr int kDoubleSolenoidReverse = 5;
 
@@ -57,8 +60,8 @@ bool extakeLowButtonAllow = true;
 void drive()
 {
 
- RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2)*.70);
-
+ //RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2)*.70);
+ RobotDrive.ArcadeDrive(drive_stick.GetRawAxis(0), drive_stick.GetRawAxis(1));
 }
 
 void intakeCargo()
@@ -148,40 +151,6 @@ void extakeCargo()
     extakeHighButtonAllow = true;
   }
 }
-/*void extakeCargo()
-{
-  if(drive_stick.GetRawButton(extakeLow) && extakeRunning == false)
-  {
-    if(extakeButtonAllow == true)
-    {
-      extakeRight.Set(-.25);
-      extakeLeft.Set(.25);
-      extakeRunning = true;
-      extakeButtonAllow = false;
-    }
-  } else if(drive_stick.GetRawButton(extakeHigh))
-  {
-    if(extakeButtonAllow == true)
-    {
-      extakeRight.Set(-.75);
-      extakeLeft.Set(.75);
-      extakeRunning = true;
-      extakeButtonAllow = false;
-    }
-  } else if(drive_stick.GetRawButton(3) && extakeRunning == false)
-  {
-    if(extakeButtonAllow == true)
-    {
-      extakeRight.Set(0);
-      extakeLeft.Set(0);
-      extakeRunning = true;
-      extakeButtonAllow = false;
-    }
-  }else
-  {
-    extakeButtonAllow = true;
-  }
-}*/
 
 void angleExtake()
 {
