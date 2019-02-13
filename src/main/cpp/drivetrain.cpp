@@ -1,15 +1,11 @@
 #include "commands/drivetrain.h"
+#include "subsystems/drivetrain.h"
 #include "Robot.h"
 #include "RobotMap.h"
 
-
-subsystem::Drivetrain::Drivetrain(const wpi::Twine &name):frc::Subsystem(name){
-    
-}
-
-command::Drive::Drive(){
-    Requires(Robot::drivetrain);
-}
+subsystem::Drivetrain::Drivetrain(const wpi::Twine &name):frc::Subsystem(name){}
+void subsystem::Drivetrain::InitDefaultCommand(){}
+command::Drive::Drive():frc::Command(*Robot::drivetrain){};
 
 void command::Drive::Initialize() {}
 

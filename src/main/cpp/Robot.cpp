@@ -10,14 +10,20 @@
 
 OI *Robot::oi = new OI;
 
+subsystem::Conveyor* Robot::conveyor = 0;
+subsystem::Extake* Robot::extake = 0;
+subsystem::Drivetrain* Robot::drivetrain = 0;
+subsystem::Intake* Robot::intake = 0;
+subsystem::HatchPanel* Robot::hatchPanel = 0;
+
 void Robot::RobotInit()
 {
     using namespace RobotMap;
-    this->conveyor = new subsystem::Conveyor("Conveyor");
-    this->extake = new subsystem::Extake("Extake");
-    this->drivetrain = new subsystem::Drivetrain("Drivetrain");
-    this->intake = new subsystem::Intake("Intake");
-    this->hatchPanel = new subsystem::HatchPanel("Hatch Panel");
+    Robot::conveyor = new subsystem::Conveyor("Conveyor");
+    Robot::extake = new subsystem::Extake("Extake");
+    Robot::drivetrain = new subsystem::Drivetrain("Drivetrain");
+    Robot::intake = new subsystem::Intake("Intake");
+    Robot::hatchPanel = new subsystem::HatchPanel("Hatch Panel");
 }
 
 void Robot::RobotPeriodic(){
@@ -32,3 +38,5 @@ void Robot::TeleopPeriodic(){
     frc::Scheduler::GetInstance()->Run();
 }
 void Robot::TestPeriodic(){}
+
+int main(){return frc::StartRobot<Robot>();}

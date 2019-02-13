@@ -5,9 +5,10 @@
 namespace command
 {
 
-class ExtakeIn : public frc::Command
+class ExtakeOutLow : public frc::Command
 {
   public:
+    ExtakeOutLow();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
@@ -15,9 +16,10 @@ class ExtakeIn : public frc::Command
     void Interrupted() override;
 };
 
-class ExtakeOut : public frc::Command
+class ExtakeOutHigh : public frc::Command
 {
   public:
+    ExtakeOutHigh();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
@@ -28,6 +30,7 @@ class ExtakeOut : public frc::Command
 class ExtakeTiltUp : public frc::Command
 {
   public:
+    ExtakeTiltUp();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
@@ -38,6 +41,7 @@ class ExtakeTiltUp : public frc::Command
 class ExtakeTiltDown : public frc::Command
 {
   public:
+    ExtakeTiltDown();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
