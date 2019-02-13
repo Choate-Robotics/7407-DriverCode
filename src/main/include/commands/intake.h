@@ -72,4 +72,16 @@ class IntakeTiltDown : public frc::Command
     void Interrupted() override;
 };
 
+class IntakeTiltStop : public frc::Command
+{
+  public:
+    IntakeTiltStop();
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+};
+
+
 } // namespace command

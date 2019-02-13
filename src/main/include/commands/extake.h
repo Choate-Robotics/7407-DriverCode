@@ -27,6 +27,16 @@ class ExtakeOutHigh : public frc::Command
     void Interrupted() override;
 };
 
+class ExtakeStop:public frc::Command{
+  public:
+  ExtakeStop();
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+};
+
 class ExtakeTiltUp : public frc::Command
 {
   public:
@@ -48,5 +58,16 @@ class ExtakeTiltDown : public frc::Command
     void End() override;
     void Interrupted() override;
 };
+
+class ExtakeTiltStop:public frc::Command{
+  public:
+  ExtakeTiltStop();
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+};
+
 
 } // namespace command

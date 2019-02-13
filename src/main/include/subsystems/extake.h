@@ -10,22 +10,22 @@ public:
 
     enum Direction{
             STOPPED, 
-            FORWARD, // in, up
-            REVERSED, // out, down
+            FORWARD, // out, up
+            REVERSED, // in, down
         };
 
     Extake(const wpi::Twine &);
     void InitDefaultCommand() override;
     void outLow();
     void outHigh();
-    void stopSpinning();
+    void stop();
 
     void tiltDown();
     void tiltUp();
     void tiltStop();
-    void angle(double); // in degrees
-
-    double getCurrentAngle();
+    
+    // void angle(double); // in degrees
+    // double getCurrentAngle();
 
     static Extake::Direction runningDirection; 
     static Extake::Direction tiltingDirection;

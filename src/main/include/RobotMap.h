@@ -5,6 +5,7 @@
 #include <frc/PWMVictorSPX.h>
 #include <frc/PWMTalonSRX.h>
 #include <frc/DoubleSolenoid.h>
+#include <frc/SpeedControllerGroup.h>
 
 #define ALEX_AND_PETER 1
 #define BELLA_AND_KNUTE 2
@@ -36,6 +37,9 @@ static frc::PWMVictorSPX intakeTilt = frc::PWMVictorSPX{6};
 static frc::PWMVictorSPX extakeTilt = frc::PWMVictorSPX{7};
 static frc::PWMVictorSPX extakeLeft = frc::PWMVictorSPX{8};
 static frc::PWMVictorSPX extakeRight = frc::PWMVictorSPX{9};
+
+static frc::SpeedControllerGroup left = frc::SpeedControllerGroup{frontLeft,backLeft};
+static frc::SpeedControllerGroup right = frc::SpeedControllerGroup{frontRight,backRight};
 
 } // namespace motor
 
@@ -81,8 +85,8 @@ static constexpr int hatchPanelOut = 6;
 
 namespace axis
 {
-static constexpr int driveX = 1;
-static constexpr int driveY = 2;
+static constexpr int driveX = 0;
+static constexpr int driveY = 1;
 static constexpr int conveyor = 3;
 } // namespace axis
 } // namespace keymap

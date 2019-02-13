@@ -24,6 +24,12 @@ void Robot::RobotInit()
     Robot::drivetrain = new subsystem::Drivetrain("Drivetrain");
     Robot::intake = new subsystem::Intake("Intake");
     Robot::hatchPanel = new subsystem::HatchPanel("Hatch Panel");
+
+    frc::Scheduler::GetInstance()->RegisterSubsystem(this->drivetrain);
+    frc::Scheduler::GetInstance()->RegisterSubsystem(this->conveyor);
+    frc::Scheduler::GetInstance()->RegisterSubsystem(this->extake);
+    frc::Scheduler::GetInstance()->RegisterSubsystem(this->intake);
+    frc::Scheduler::GetInstance()->RegisterSubsystem(this->hatchPanel);
 }
 
 void Robot::RobotPeriodic(){
