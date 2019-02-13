@@ -31,8 +31,8 @@ frc::DoubleSolenoid solenoid_top{1, 0};
 frc::DoubleSolenoid solenoid_left{2, 3};
 frc::DoubleSolenoid solenoid_right{4, 5};
 
-frc::Joystick drive_stick{3};
-frc::Joystick mech_stick{4};
+frc::Joystick drive_stick{1};
+frc::Joystick mech_stick{0};
 
 int extakeOut = 8;
 int extakeIn = 7;
