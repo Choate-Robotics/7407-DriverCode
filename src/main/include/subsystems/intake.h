@@ -6,6 +6,7 @@
 namespace subsystem{
 
 class Intake: public frc::Subsystem {
+protected:
     enum Direction{
         STOPPED, 
         FORWARD, // in, up
