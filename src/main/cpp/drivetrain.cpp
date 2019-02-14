@@ -10,16 +10,16 @@ void subsystem::Drivetrain::InitDefaultCommand()
 {
     SetDefaultCommand(new command::Drive);
 }
-command::Drive::Drive() : frc::Command(*Robot::drivetrain){};
+command::Drive::Drive() : frc::Command(*Robot::drivetrain){}
 
 void command::Drive::Initialize()
 {
-    this->differentialDrive = new frc::DifferentialDrive{RobotMap::motor::left, RobotMap::motor::right};
+
 }
 
 void command::Drive::Execute()
 {
-    this->differentialDrive->ArcadeDrive(
+    RobotMap::motor::differentialDrive->ArcadeDrive(
         Robot::oi->joystick[RobotMap::joystick::drivetrain]->GetRawAxis(RobotMap::keymap::axis::driveX),
         Robot::oi->joystick[RobotMap::joystick::drivetrain]->GetRawAxis(RobotMap::keymap::axis::driveY)
     );

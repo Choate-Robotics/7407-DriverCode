@@ -3,7 +3,7 @@
 #include "RobotMap.h"
 #include "Robot.h"
 
-subsystem::HatchPanel::HatchPanel(const wpi::Twine &name):frc::Subsystem(name){};
+subsystem::HatchPanel::HatchPanel(const wpi::Twine &name):frc::Subsystem(name){}
 
 void subsystem::HatchPanel::out(){
     RobotMap::solenoid::left.Set(frc::DoubleSolenoid::kForward);

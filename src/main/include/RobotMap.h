@@ -26,20 +26,21 @@ namespace RobotMap
 namespace motor
 {
 
-static frc::PWMTalonSRX frontLeft = frc::PWMTalonSRX{0};
-static frc::PWMTalonSRX frontRight = frc::PWMTalonSRX{1};
-static frc::PWMTalonSRX backLeft = frc::PWMTalonSRX{2};
-static frc::PWMTalonSRX backRight = frc::PWMTalonSRX{3};
+static auto frontLeft = frc::PWMTalonSRX{0};
+static auto frontRight = frc::PWMTalonSRX{1};
+static auto backLeft = frc::PWMTalonSRX{2};
+static auto backRight = frc::PWMTalonSRX{3};
 
-static frc::PWMVictorSPX conveyor = frc::PWMVictorSPX{4};
-static frc::PWMVictorSPX intake = frc::PWMVictorSPX{5};
-static frc::PWMVictorSPX intakeTilt = frc::PWMVictorSPX{6};
-static frc::PWMVictorSPX extakeTilt = frc::PWMVictorSPX{7};
-static frc::PWMVictorSPX extakeLeft = frc::PWMVictorSPX{8};
-static frc::PWMVictorSPX extakeRight = frc::PWMVictorSPX{9};
+static auto conveyor = frc::PWMVictorSPX{4};
+static auto intake = frc::PWMVictorSPX{5};
+static auto intakeTilt = frc::PWMVictorSPX{6};
+static auto extakeTilt = frc::PWMVictorSPX{7};
+static auto extakeLeft = frc::PWMVictorSPX{8};
+static auto extakeRight = frc::PWMVictorSPX{9};
 
-static frc::SpeedControllerGroup left = frc::SpeedControllerGroup{frontLeft,backLeft};
-static frc::SpeedControllerGroup right = frc::SpeedControllerGroup{frontRight,backRight};
+static auto left = frc::SpeedControllerGroup{frontLeft,backLeft};
+static auto right = frc::SpeedControllerGroup{frontRight,backRight};
+static auto differentialDrive = new frc::DifferentialDrive{RobotMap::motor::left, RobotMap::motor::right};
 
 } // namespace motor
 

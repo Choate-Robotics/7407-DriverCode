@@ -8,7 +8,6 @@ namespace command
 
 class Drive : public frc::Command
 {
-  frc::DifferentialDrive * differentialDrive=nullptr;
   public:
     Drive();
     void Initialize() override;
