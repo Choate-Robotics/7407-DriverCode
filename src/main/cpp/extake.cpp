@@ -10,35 +10,35 @@ subsystem::Extake::Direction subsystem::Extake::runningDirection = STOPPED;
 subsystem::Extake::Direction subsystem::Extake::tiltingDirection = STOPPED;
 
 void subsystem::Extake::outLow(){
-    RobotMap::motor::extakeLeft.Set(0.25);
-    RobotMap::motor::extakeRight.Set(-0.25);
+    RobotMap::motor::extakeLeft->Set(0.25);
+    RobotMap::motor::extakeRight->Set(-0.25);
     this->runningDirection=FORWARD;
 }
 
 void subsystem::Extake::outHigh(){
-    RobotMap::motor::extakeLeft.Set(0.5);
-    RobotMap::motor::extakeLeft.Set(-0.5);
+    RobotMap::motor::extakeLeft->Set(0.5);
+    RobotMap::motor::extakeLeft->Set(-0.5);
     this->runningDirection=FORWARD;
 }
 
 void subsystem::Extake::stop(){
-    RobotMap::motor::extakeLeft.Set(0);
-    RobotMap::motor::extakeRight.Set(0);
+    RobotMap::motor::extakeLeft->Set(0);
+    RobotMap::motor::extakeRight->Set(0);
     this->runningDirection=STOPPED;
 }
 
 void subsystem::Extake::tiltUp(){
-    RobotMap::motor::extakeTilt.Set(0.3);
+    RobotMap::motor::extakeTilt->Set(0.3);
     this->tiltingDirection=REVERSED;
 }
 
 void subsystem::Extake::tiltDown(){
-    RobotMap::motor::extakeTilt.Set(-0.3);
+    RobotMap::motor::extakeTilt->Set(-0.3);
     this->tiltingDirection=FORWARD;
 }
 
 void subsystem::Extake::tiltStop(){
-    RobotMap::motor::extakeTilt.Set(0);
+    RobotMap::motor::extakeTilt->Set(0);
     this->tiltingDirection=STOPPED;
 }
 

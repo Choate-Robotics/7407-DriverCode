@@ -10,17 +10,17 @@ subsystem::Intake::Direction subsystem::Intake::runningDirection = STOPPED;
 subsystem::Intake::Direction subsystem::Intake::tiltingDirection = STOPPED;
 
 void subsystem::Intake::in(){
-    RobotMap::motor::intake.Set(0.5);
+    RobotMap::motor::intake->Set(0.5);
     this->runningDirection=FORWARD;
 }
 
 void subsystem::Intake::out(){
-    RobotMap::motor::intake.Set(-0.5);
+    RobotMap::motor::intake->Set(-0.5);
     this->runningDirection=REVERSED;
 }
 
 void subsystem::Intake::stop(){
-    RobotMap::motor::intake.Set(0);
+    RobotMap::motor::intake->Set(0);
     this->runningDirection=STOPPED;
 }
 
@@ -33,17 +33,17 @@ void subsystem::Intake::toggle(){
 }
 
 void subsystem::Intake::tiltUp(){
-    RobotMap::motor::intakeTilt.Set(0.5);
+    RobotMap::motor::intakeTilt->Set(0.5);
     this->tiltingDirection=FORWARD;
 }
 
 void subsystem::Intake::tiltDown(){
-    RobotMap::motor::intakeTilt.Set(-0.5);
+    RobotMap::motor::intakeTilt->Set(-0.5);
     this->tiltingDirection=REVERSED;
 }
 
 void subsystem::Intake::tiltStop(){
-    RobotMap::motor::intakeTilt.Set(0);
+    RobotMap::motor::intakeTilt->Set(0);
     this->tiltingDirection=STOPPED;
 }
 

@@ -19,6 +19,23 @@ subsystem::HatchPanel* Robot::hatchPanel = 0;
 void Robot::RobotInit()
 {
     using namespace RobotMap;
+
+    motor::frontLeft = new frc::PWMTalonSRX{0};
+    motor::frontRight = new frc::PWMTalonSRX{1};
+    motor::backLeft = new frc::PWMTalonSRX{2};
+    motor::backRight = new frc::PWMTalonSRX{3};
+
+    motor::conveyor = new frc::PWMVictorSPX{4};
+    motor::intake = new frc::PWMVictorSPX{5};
+    motor::intakeTilt = new frc::PWMVictorSPX{6};
+    motor::extakeTilt = new frc::PWMVictorSPX{7};
+    motor::extakeLeft = new frc::PWMVictorSPX{8};
+    motor::extakeRight = new frc::PWMVictorSPX{9};
+
+    motor::left = new frc::SpeedControllerGroup{*motor::frontLeft,*motor::backLeft};
+    motor::right = new frc::SpeedControllerGroup{*motor::frontRight,*motor::backRight};
+    motor::differentialDrive = new frc::DifferentialDrive{*motor::left, *motor::right};
+
     Robot::conveyor = new subsystem::Conveyor("Conveyor");
     Robot::extake = new subsystem::Extake("Extake");
     Robot::drivetrain = new subsystem::Drivetrain("Drivetrain");

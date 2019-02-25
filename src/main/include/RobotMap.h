@@ -26,21 +26,22 @@ namespace RobotMap
 namespace motor
 {
 
-static auto frontLeft = frc::PWMTalonSRX{0};
-static auto frontRight = frc::PWMTalonSRX{1};
-static auto backLeft = frc::PWMTalonSRX{2};
-static auto backRight = frc::PWMTalonSRX{3};
+static frc::PWMTalonSRX * frontLeft = 0;
+static frc::PWMTalonSRX * frontRight = 0;
+static frc::PWMTalonSRX * backLeft = 0;
+static frc::PWMTalonSRX * backRight = 0;
 
-static auto conveyor = frc::PWMVictorSPX{4};
-static auto intake = frc::PWMVictorSPX{5};
-static auto intakeTilt = frc::PWMVictorSPX{6};
-static auto extakeTilt = frc::PWMVictorSPX{7};
-static auto extakeLeft = frc::PWMVictorSPX{8};
-static auto extakeRight = frc::PWMVictorSPX{9};
+static frc::PWMVictorSPX * conveyor = 0;
+static frc::PWMVictorSPX * intake = 0;
+static frc::PWMVictorSPX * intakeTilt = 0;
+static frc::PWMVictorSPX * extakeTilt = 0;
+static frc::PWMVictorSPX * extakeLeft = 0;
+static frc::PWMVictorSPX * extakeRight = 0;
 
-static auto left = frc::SpeedControllerGroup{frontLeft,backLeft};
-static auto right = frc::SpeedControllerGroup{frontRight,backRight};
-static auto differentialDrive = new frc::DifferentialDrive{RobotMap::motor::left, RobotMap::motor::right};
+static frc::SpeedControllerGroup * left = 0;
+static frc::SpeedControllerGroup * right = 0;
+static frc::DifferentialDrive * differentialDrive = 0;
+
 
 } // namespace motor
 
