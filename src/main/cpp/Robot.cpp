@@ -6,9 +6,28 @@
 #include "subsystems/intake.h"
 #include "subsystems/extake.h"
 #include "subsystems/hatchPanel.h"
+#include <iostream>
 #include <frc/commands/Scheduler.h>
 
+using namespace std;
+using namespace RobotMap;
+
 OI *Robot::oi = new OI;
+
+frc::PWMTalonSRX * motor::frontLeft;
+frc::PWMTalonSRX * motor::frontRight;
+frc::PWMTalonSRX * motor::backLeft;
+frc::PWMTalonSRX * motor::backRight;
+frc::PWMVictorSPX * motor::conveyor;
+frc::PWMVictorSPX * motor::intake;
+frc::PWMVictorSPX * motor::intakeTilt;
+frc::PWMVictorSPX * motor::extakeTilt;
+frc::PWMVictorSPX * motor::extakeLeft;
+frc::PWMVictorSPX * motor::extakeRight;
+frc::SpeedControllerGroup * motor::left;
+frc::SpeedControllerGroup * motor::right;
+frc::DifferentialDrive * motor::differentialDrive;
+
 
 subsystem::Conveyor* Robot::conveyor = 0;
 subsystem::Extake* Robot::extake = 0;
@@ -18,7 +37,6 @@ subsystem::HatchPanel* Robot::hatchPanel = 0;
 
 void Robot::RobotInit()
 {
-    using namespace RobotMap;
 
     motor::frontLeft = new frc::PWMTalonSRX{0};
     motor::frontRight = new frc::PWMTalonSRX{1};
@@ -35,6 +53,8 @@ void Robot::RobotInit()
     motor::left = new frc::SpeedControllerGroup{*motor::frontLeft,*motor::backLeft};
     motor::right = new frc::SpeedControllerGroup{*motor::frontRight,*motor::backRight};
     motor::differentialDrive = new frc::DifferentialDrive{*motor::left, *motor::right};
+
+    cout<<motor::conveyor<<endl;
 
     Robot::conveyor = new subsystem::Conveyor("Conveyor");
     Robot::extake = new subsystem::Extake("Extake");

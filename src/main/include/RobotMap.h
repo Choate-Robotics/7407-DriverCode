@@ -23,24 +23,20 @@
 namespace RobotMap
 {
 
-namespace motor
-{
-
-static frc::PWMTalonSRX * frontLeft = 0;
-static frc::PWMTalonSRX * frontRight = 0;
-static frc::PWMTalonSRX * backLeft = 0;
-static frc::PWMTalonSRX * backRight = 0;
-
-static frc::PWMVictorSPX * conveyor = 0;
-static frc::PWMVictorSPX * intake = 0;
-static frc::PWMVictorSPX * intakeTilt = 0;
-static frc::PWMVictorSPX * extakeTilt = 0;
-static frc::PWMVictorSPX * extakeLeft = 0;
-static frc::PWMVictorSPX * extakeRight = 0;
-
-static frc::SpeedControllerGroup * left = 0;
-static frc::SpeedControllerGroup * right = 0;
-static frc::DifferentialDrive * differentialDrive = 0;
+namespace motor{
+extern frc::PWMTalonSRX * frontLeft;
+extern frc::PWMTalonSRX * frontRight;
+extern frc::PWMTalonSRX * backLeft;
+extern frc::PWMTalonSRX * backRight;
+extern frc::PWMVictorSPX * conveyor;
+extern frc::PWMVictorSPX * intake;
+extern frc::PWMVictorSPX * intakeTilt;
+extern frc::PWMVictorSPX * extakeTilt;
+extern frc::PWMVictorSPX * extakeLeft;
+extern frc::PWMVictorSPX * extakeRight;
+extern frc::SpeedControllerGroup * left;
+extern frc::SpeedControllerGroup * right;
+extern frc::DifferentialDrive * differentialDrive;
 
 
 } // namespace motor
@@ -66,7 +62,7 @@ static constexpr int hatchPanel = PRIMARY_JOYSTICK;
 static constexpr int intake = SECONDARY_JOYSTICK;
 static constexpr int extake = SECONDARY_JOYSTICK;
 static constexpr int extakeTilt = SECONDARY_JOYSTICK;
-static constexpr int conveyor = SECONDARY_JOYSTICK;
+static int conveyor = SECONDARY_JOYSTICK;
 } // namespace joystick
 
 namespace keymap
@@ -87,9 +83,9 @@ static constexpr int hatchPanelOut = 6;
 
 namespace axis
 {
-static constexpr int driveX = 0;
-static constexpr int driveY = 1;
-static constexpr int conveyor = 3;
+static constexpr int driveX = 1;
+static constexpr int driveY = 0;
+static int conveyor = 3;
 } // namespace axis
 } // namespace keymap
 
