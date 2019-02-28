@@ -47,8 +47,8 @@ int intakeToggle = 2;
 int extakeHigh = 5;
 int extakeLow = 6;
 
-static constexpr int kDoubleSolenoidForward = 6;
-static constexpr int kDoubleSolenoidReverse = 5;
+static constexpr int kDoubleSolenoidForward = 5;
+static constexpr int kDoubleSolenoidReverse = 6;
 
 bool intakeRunning = false;
 bool intakeButtonAllow = true;
@@ -60,8 +60,8 @@ bool extakeLowButtonAllow = true;
 void drive()
 {
 
- //RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2)*.70);
- RobotDrive.ArcadeDrive(drive_stick.GetRawAxis(0), drive_stick.GetRawAxis(1));
+ RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2)*.80);
+ //RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2));
 }
 
 void intakeCargo()
@@ -101,8 +101,8 @@ void extakeCargo()
   {
     if (extakeLowButtonAllow == true)
     {
-      extakeLeft.Set(.25);
-      extakeRight.Set(-.25);
+      extakeLeft.Set(-.25);
+      extakeRight.Set(.25);
       extakeLowRunning = true;
       extakeLowButtonAllow = false;
       std::cout << "low on" << "\n";
@@ -128,8 +128,8 @@ void extakeCargo()
   {
     if (extakeHighButtonAllow == true)
     {
-      extakeLeft.Set(.5);
-      extakeRight.Set(-.5);
+      extakeLeft.Set(-.5);
+      extakeRight.Set(.5);
       extakeHighRunning = true;
       extakeHighButtonAllow = false;
       std::cout << "high on" << "\n";
