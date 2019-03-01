@@ -1,12 +1,21 @@
 #pragma once
 
-#include <string>
+#include <frc/TimedRobot.h>
+#include <frc/drive/DifferentialDrive.h>
+#include <frc/PWMVictorSPX.h>
+#include <frc/PWMTalonSRX.h>
 
-#include <frc/IterativeRobot.h>
-#include <frc/smartdashboard/SendableChooser.h>
+#include "OI.h"
+#include "subsystems/conveyor.h"
+#include "subsystems/drivetrain.h"
+#include "subsystems/hatchPanel.h"
+#include "subsystems/intake.h"
+#include "subsystems/extake.h"
 
-class Robot : public frc::IterativeRobot {
- public:
+class Robot : public frc::TimedRobot
+{
+
+public:
   void RobotInit() override;
   void RobotPeriodic() override;
   void AutonomousInit() override;
@@ -14,10 +23,10 @@ class Robot : public frc::IterativeRobot {
   void TeleopInit() override;
   void TeleopPeriodic() override;
   void TestPeriodic() override;
-
- private:
-  frc::SendableChooser<std::string> m_chooser;
-  const std::string kAutoNameDefault = "Default";
-  const std::string kAutoNameCustom = "My Auto";
-  std::string m_autoSelected;
+  static OI *oi;
+  static subsystem::Conveyor *conveyor;
+  static subsystem::Drivetrain *drivetrain;
+  static subsystem::Intake *intake;
+  static subsystem::HatchPanel *hatchPanel;
+  static subsystem::Extake *extake; 
 };
