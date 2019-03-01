@@ -75,16 +75,16 @@ static constexpr int extakeHigh = 5;
 static constexpr int extakeLow = 6;
 static constexpr int intakeTiltDown = 8;
 static constexpr int intakeTiltUp = 7;
-static constexpr int intakeToggle = 2;
-static constexpr int hatchPanelIn = 5;
-static constexpr int hatchPanelOut = 6;
+static constexpr int intakeToggle = 1;
+static constexpr int hatchPanelIn = 6;
+static constexpr int hatchPanelOut = 5;
 
 } // namespace buttons
 
 namespace axis
 {
 static constexpr int driveX = 1;
-static constexpr int driveY = 0;
+static constexpr int driveY = 2;
 static int conveyor = 3;
 } // namespace axis
 } // namespace keymap

@@ -27,8 +27,8 @@ OI::OI()
     this->joystick[SECONDARY_JOYSTICK] = new frc::Joystick{joystick::portSecondary};
 
     this->buttonIntakeToggle = new frc::JoystickButton(joystick[joystick::intake], keymap::button::intakeToggle);
-    this->buttonIntakeTiltUp = new frc::JoystickButton(joystick[joystick::intake], keymap::button::intakeTiltUp);
-    this->buttonIntakeTiltDown = new frc::JoystickButton(joystick[joystick::intake], keymap::button::intakeTiltDown);
+    this->buttonIntakeTiltUp = new frc::JoystickButton(joystick[joystick::intakeTilt], keymap::button::intakeTiltUp);
+    this->buttonIntakeTiltDown = new frc::JoystickButton(joystick[joystick::intakeTilt], keymap::button::intakeTiltDown);
 
     this->buttonExtakeHigh = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeHigh);
     this->buttonExtakeLow = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeLow);
