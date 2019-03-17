@@ -4,7 +4,9 @@
 #include "Robot.h"
 
 subsystem::Intake::Intake(const wpi::Twine & name):frc::Subsystem(name){}
-void subsystem::Intake::InitDefaultCommand(){}
+void subsystem::Intake::InitDefaultCommand(){
+    RobotMap::motor::intake->Set(-0.05);
+}
 
 subsystem::Intake::Direction subsystem::Intake::runningDirection = STOPPED;
 subsystem::Intake::Direction subsystem::Intake::tiltingDirection = STOPPED;
@@ -26,9 +28,9 @@ void subsystem::Intake::stop(){
 
 void subsystem::Intake::toggle(){
     if (runningDirection==FORWARD){
-        out();
+        subsystem::Intake::out();
     } else if (runningDirection==REVERSED){
-        in();
+        subsystem::Intake::in();
     } 
 }
 

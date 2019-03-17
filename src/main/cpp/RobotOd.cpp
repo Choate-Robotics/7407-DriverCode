@@ -1,4 +1,5 @@
 /*
+#include "Robot.h"
 #include <iostream>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/Joystick.h>
@@ -9,33 +10,17 @@
 #include <frc/DoubleSolenoid.h>
 #include <string.h>
 
-#include "Robot.h"
-#include "RobotMap.h"
+frc::PWMVictorSPX leftFront{0};
+frc::PWMVictorSPX leftBack{2};
+frc::PWMVictorSPX rightFront{1};
+frc::PWMVictorSPX rightBack{3};
 
-/* Intake: On (3), Off (5)
-   Extake: On (4), Off (6)
-   Conveyor: On (Trigger), Off (2)
-   Intake arm: Forward(11), Off(9), Backward(7)
-   Extake arm: Forward(12), Off(10), Backward(8)
-   Pneumatics: Forward(Toggle forward), Backward(Toggle backward)
-
-frc::PWMTalonSRX leftFront{0};
-frc::PWMTalonSRX leftBack{2};
-frc::PWMTalonSRX rightFront{1};
-frc::PWMTalonSRX rightBack{3};
-
-
-frc::PWMTalonSRX leftFront{RobotMap::portFrontLeft};
-frc::PWMTalonSRX leftBack{RobotMap::portBackLeft};
-frc::PWMTalonSRX rightFront{RobotMap::portFrontRight};
-frc::PWMTalonSRX rightBack{RobotMap::portBackRight};
-
-frc::PWMVictorSPX conveyorMotor{RobotMap::portConveyor};
-frc::PWMVictorSPX intakeMotor{RobotMap::portIntake};
-frc::PWMVictorSPX intakeAngle{RobotMap::portAngleIn};
-frc::PWMVictorSPX extakeAngle{RobotMap::portAngleOut};
-frc::PWMVictorSPX extakeRight{RobotMap::portOutRight};
-frc::PWMVictorSPX extakeLeft{RobotMap::portOutLeft};
+frc::PWMVictorSPX conveyorMotor{4};
+frc::PWMVictorSPX intakeMotor{5};
+frc::PWMVictorSPX intakeAngle{6};
+frc::PWMVictorSPX extakeAngle{7};
+frc::PWMVictorSPX extakeRight{8};
+frc::PWMVictorSPX extakeLeft{9};
 
 frc::SpeedControllerGroup left{leftFront, leftBack};
 frc::SpeedControllerGroup right{rightFront, rightBack};
@@ -43,48 +28,59 @@ frc::DifferentialDrive RobotDrive(left, right);
 
 frc::SpeedControllerGroup extake{extakeLeft, extakeRight};
 
-frc::DoubleSolenoid solenoid_top{0, 1};
+frc::DoubleSolenoid solenoid_top{1, 0};
 frc::DoubleSolenoid solenoid_left{2, 3};
 frc::DoubleSolenoid solenoid_right{4, 5};
 
-frc::Joystick stick{2};
+frc::Joystick drive_stick{1};
+frc::Joystick mech_stick{0};
 
-std::string stick_type;
+int extakeOut = 8;
+int extakeIn = 7;
+int intakeOut = 8;
+int intakeIn = 7;
+int intakeToggle = 2;
+int extakeHigh = 5;
+int extakeLow = 6;
 
-static constexpr int kDoubleSolenoidForward = 5;
-static constexpr int kDoubleSolenoidReverse = 6;
+static constexpr int kDoubleSolenoidForward = 6;
+static constexpr int kDoubleSolenoidReverse = 5;
 
-bool intakeVar = true;
+bool intakeRunning = false;
 bool intakeButtonAllow = true;
-bool extakeVar = true;
-bool extakeButtonAllow = true;
+bool extakeHighRunning = false;
+bool extakeHighButtonAllow = true;
+bool extakeLowRunning = false;
+bool extakeLowButtonAllow = true;
 
 void drive()
 {
 
- RobotDrive.TankDrive(-stick.GetRawAxis(1), -stick.GetRawAxis(5));
-
+ //RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2)*.70);
+ RobotDrive.ArcadeDrive(drive_stick.GetRawAxis(0), drive_stick.GetRawAxis(1));
 }
 
 void intakeCargo()
 {
-  if(stick.GetRawButton(1) && intakeVar == true)
+  if(mech_stick.GetRawButton(intakeToggle) && intakeRunning == false)
   {
-    if(intakeButtonAllow == true){
-    intakeMotor.Set(.5);
-    intakeVar = false;
-    intakeButtonAllow = false;
+    if(intakeButtonAllow == true)
+    {
+      intakeMotor.Set(.5);
+      intakeRunning = true;
+      intakeButtonAllow = false;
     }
   }
-  else if(stick.GetRawButton(1) && intakeVar == false)
+  else if(mech_stick.GetRawButton(intakeToggle) && intakeRunning == true)
   {
     if(intakeButtonAllow == true)
     {
       intakeMotor.Set(0);
-      intakeVar = true;
+      intakeRunning = false;
       intakeButtonAllow = false;
     }
-  }else
+  }
+  else
   {
     intakeButtonAllow = true;
   }
@@ -92,83 +88,92 @@ void intakeCargo()
 
 void carryCargo()
 {
-  if(stick.GetRawAxis(2) > 0)
-  {
-   conveyorMotor.Set(-stick.GetRawAxis(2));
-  }else if(stick.GetRawAxis(3) > 0)
-  {
-    conveyorMotor.Set(stick.GetRawAxis(3));
-  }else
-  {
-    conveyorMotor.Set(0);
-  }
+  conveyorMotor.Set(mech_stick.GetRawAxis(3));
 }
 
 void extakeCargo()
 {
-  if(stick.GetRawButton(3) && extakeVar == true)
+  if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning == false)
   {
-    if(extakeButtonAllow == true)
+    if (extakeLowButtonAllow == true)
     {
-      extakeRight.Set(-.5);
-      extakeLeft.Set(.5);
-      extakeVar = false;
-      extakeButtonAllow = false;
+      extakeLeft.Set(.25);
+      extakeRight.Set(-.25);
+      extakeLowRunning = true;
+      extakeLowButtonAllow = false;
+      std::cout << "low on" << "\n";
     }
-  }else if(stick.GetRawButton(4))
+  }
+  else if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning == true)
   {
-    if(extakeButtonAllow == true)
+    if (extakeLowButtonAllow == true)
     {
-      extakeRight.Set(-.75);
-      extakeLeft.Set(.75);
-      extakeVar = false;
-      extakeButtonAllow = false;
-    }
-  }else if(stick.GetRawButton(3) && extakeVar == false)
-  {
-    if(extakeButtonAllow == true)
-    {
-      extakeRight.Set(0);
       extakeLeft.Set(0);
-      extakeVar = true;
-      extakeButtonAllow = false;
+      extakeRight.Set(0);
+      extakeLowRunning = false;
+      extakeLowButtonAllow = false;
+      std::cout << "low off" << "\n";
     }
-  }else
-  {
-    extakeButtonAllow = true;
-  }
-}
-
-void angleIntake()
-{
-  if (stick.GetRawButton(5))
-  {
-    intakeAngle.Set(.3);
-  }
-  else if (stick.GetRawButton(6))
-  {
-    intakeAngle.Set(-.5);
   }
   else
   {
-    intakeAngle.Set(-.05);
+    extakeLowButtonAllow = true;
+  }
+
+  if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning == false)
+  {
+    if (extakeHighButtonAllow == true)
+    {
+      extakeLeft.Set(.5);
+      extakeRight.Set(-.5);
+      extakeHighRunning = true;
+      extakeHighButtonAllow = false;
+      std::cout << "high on" << "\n";
+    }
+  }
+  else if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning == true)
+  {
+    if (extakeHighButtonAllow == true)
+    {
+      extakeLeft.Set(0);
+      extakeRight.Set(0);
+      extakeHighRunning = false;
+      extakeHighButtonAllow = false;
+      std::cout << "high off" << "\n";
+    }
+  }
+  else
+  {
+    extakeHighButtonAllow = true;
   }
 }
 
 void angleExtake()
 {
-  if (stick.GetRawButton(7))
+  while (mech_stick.GetRawButton(extakeOut))
   {
-    extakeAngle.Set(.25);
+    extakeAngle.Set(.3);
   }
-  else if (stick.GetRawButton(8))
+  while (mech_stick.GetRawButton(extakeIn))
   {
-    extakeAngle.Set(-.25);
+    extakeAngle.Set(-.3);
   }
-  else
+    
+  extakeAngle.Set(0);
+}
+
+void angleIntake()
+{
+  while (drive_stick.GetRawButton(intakeOut))
   {
-    extakeAngle.Set(0);
+    intakeAngle.Set(.5);
   }
+  while (drive_stick.GetRawButton(intakeIn))
+  {
+    intakeAngle.Set(-.4);
+  }
+  
+  intakeAngle.Set(-.05);
 }
 
 void runIntake() 
@@ -186,14 +191,14 @@ void runExtake()
 
 void runHatch()
 {
-  if (stick.GetPOV() == 180)
+  if (drive_stick.GetRawButton(kDoubleSolenoidForward))
   {
     solenoid_top.Set(frc::DoubleSolenoid::kForward);
     solenoid_left.Set(frc::DoubleSolenoid::kForward);
     solenoid_right.Set(frc::DoubleSolenoid::kForward); 
     std::cout << "out" << "\n";
   }
-  else if (stick.GetPOV() == 0)
+  else if (drive_stick.GetRawButton(kDoubleSolenoidReverse))
   {
     solenoid_top.Set(frc::DoubleSolenoid::kReverse);
     solenoid_left.Set(frc::DoubleSolenoid::kReverse);
@@ -210,7 +215,6 @@ void runHatch()
 
 void Robot::RobotInit()
 {
-  stick_type = stick.GetName();
 }
 
 void Robot::RobotPeriodic() {}
@@ -234,6 +238,7 @@ void Robot::TestPeriodic() {}
 #ifndef RUNNING_FRC_TESTS
 int main() { return frc::StartRobot<Robot>(); }
 #endif
+
 
 
 */

@@ -10,15 +10,25 @@ subsystem::Extake::Direction subsystem::Extake::runningDirection = STOPPED;
 subsystem::Extake::Direction subsystem::Extake::tiltingDirection = STOPPED;
 
 void subsystem::Extake::outLow(){
-    RobotMap::motor::extakeLeft->Set(0.25);
-    RobotMap::motor::extakeRight->Set(-0.25);
-    this->runningDirection=FORWARD;
+    if(this->runningDirection == FORWARD){
+        RobotMap::motor::extakeLeft->Set(0.25);
+        RobotMap::motor::extakeRight->Set(-0.25);
+        this->runningDirection=FORWARD;
+    }
+    else{
+        stop();
+    }
 }
 
 void subsystem::Extake::outHigh(){
-    RobotMap::motor::extakeLeft->Set(0.5);
-    RobotMap::motor::extakeLeft->Set(-0.5);
-    this->runningDirection=FORWARD;
+    if(this->runningDirection == FORWARD){
+        RobotMap::motor::extakeLeft->Set(0.5);
+        RobotMap::motor::extakeLeft->Set(-0.5);
+        this->runningDirection=FORWARD;
+    }
+    else{
+        stop();
+    }
 }
 
 void subsystem::Extake::stop(){
@@ -46,14 +56,14 @@ void subsystem::Extake::tiltStop(){
 command::ExtakeOutLow::ExtakeOutLow():frc::Command(*Robot::extake){}
 void command::ExtakeOutLow::Initialize() {Robot::extake->outLow();}
 void command::ExtakeOutLow::Execute() {}
-bool command::ExtakeOutLow::IsFinished() { return true; }
+bool command::ExtakeOutLow::IsFinished() { return false; }
 void command::ExtakeOutLow::End() {}
 void command::ExtakeOutLow::Interrupted() {}
 
 command::ExtakeOutHigh::ExtakeOutHigh():frc::Command(*Robot::extake){}
 void command::ExtakeOutHigh::Initialize(){Robot::extake->outHigh();}
 void command::ExtakeOutHigh::Execute() {}
-bool command::ExtakeOutHigh::IsFinished() { return true; }
+bool command::ExtakeOutHigh::IsFinished() { return false; }
 void command::ExtakeOutHigh::End() {}
 void command::ExtakeOutHigh::Interrupted() {}
 

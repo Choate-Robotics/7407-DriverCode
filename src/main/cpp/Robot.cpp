@@ -54,8 +54,6 @@ void Robot::RobotInit()
     motor::right = new frc::SpeedControllerGroup{*motor::frontRight,*motor::backRight};
     motor::differentialDrive = new frc::DifferentialDrive{*motor::left, *motor::right};
 
-    cout<<motor::conveyor<<endl;
-
     Robot::conveyor = new subsystem::Conveyor("Conveyor");
     Robot::extake = new subsystem::Extake("Extake");
     Robot::drivetrain = new subsystem::Drivetrain("Drivetrain");

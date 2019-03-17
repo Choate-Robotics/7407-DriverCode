@@ -62,7 +62,7 @@ static constexpr int hatchPanel = PRIMARY_JOYSTICK;
 static constexpr int intake = SECONDARY_JOYSTICK;
 static constexpr int extake = SECONDARY_JOYSTICK;
 static constexpr int extakeTilt = SECONDARY_JOYSTICK;
-static int conveyor = SECONDARY_JOYSTICK;
+static constexpr int conveyor = SECONDARY_JOYSTICK;
 } // namespace joystick
 
 namespace keymap
@@ -85,7 +85,7 @@ namespace axis
 {
 static constexpr int driveX = 1;
 static constexpr int driveY = 0;
-static int conveyor = 3;
+static constexpr int conveyor = 3;
 } // namespace axis
 } // namespace keymap
 
