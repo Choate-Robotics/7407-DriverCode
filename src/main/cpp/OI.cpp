@@ -7,18 +7,22 @@
 #include "commands/conveyor.h"
 #include "commands/extake.h"
 #include "commands/intake.h"
+#include "commands/climber.h"
 
-frc::Joystick *OI::joystick[2] = {0};
-frc::JoystickButton *OI::buttonIntakeToggle = 0;
-frc::JoystickButton *OI::buttonIntakeTiltUp = 0;
-frc::JoystickButton *OI::buttonIntakeTiltDown = 0;
 
-frc::JoystickButton *OI::buttonExtakeHigh = 0;
-frc::JoystickButton *OI::buttonExtakeLow = 0;
-frc::JoystickButton *OI::buttonExtakeTiltUp = 0;
-frc::JoystickButton *OI::buttonExtakeTiltDown = 0;
-frc::JoystickButton *OI::buttonSolenoidsOut = 0;
-frc::JoystickButton *OI::buttonSolenoidsIn = 0;
+frc::Joystick *OI::joystick[2] = {nullptr};
+frc::JoystickButton *OI::buttonIntakeToggle = nullptr;
+frc::JoystickButton *OI::buttonIntakeTiltUp = nullptr;
+frc::JoystickButton *OI::buttonIntakeTiltDown = nullptr;
+
+frc::JoystickButton *OI::buttonExtakeHigh =nullptr;
+frc::JoystickButton *OI::buttonExtakeLow = nullptr;
+frc::JoystickButton *OI::buttonExtakeTiltUp = nullptr;
+frc::JoystickButton *OI::buttonExtakeTiltDown = nullptr;
+frc::JoystickButton *OI::buttonSolenoidsOut = nullptr;
+frc::JoystickButton *OI::buttonSolenoidsIn = nullptr;
+frc::JoystickButton *OI::buttonClimberFrontToggle = nullptr;
+frc::JoystickButton *OI::buttonClimberBackToggle = nullptr;
 
 OI::OI()
 {
@@ -27,8 +31,8 @@ OI::OI()
     this->joystick[SECONDARY_JOYSTICK] = new frc::Joystick{joystick::portSecondary};
 
     this->buttonIntakeToggle = new frc::JoystickButton(joystick[joystick::intake], keymap::button::intakeToggle);
-    this->buttonIntakeTiltUp = new frc::JoystickButton(joystick[joystick::intake], keymap::button::intakeTiltUp);
-    this->buttonIntakeTiltDown = new frc::JoystickButton(joystick[joystick::intake], keymap::button::intakeTiltDown);
+    this->buttonIntakeTiltUp = new frc::JoystickButton(joystick[joystick::intakeTilt], keymap::button::intakeTiltUp);
+    this->buttonIntakeTiltDown = new frc::JoystickButton(joystick[joystick::intakeTilt], keymap::button::intakeTiltDown);
 
     this->buttonExtakeHigh = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeHigh);
     this->buttonExtakeLow = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeLow);
@@ -36,6 +40,8 @@ OI::OI()
     this->buttonExtakeTiltDown = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeTiltDown);
     this->buttonSolenoidsOut = new frc::JoystickButton(joystick[joystick::hatchPanel], keymap::button::hatchPanelOut);
     this->buttonSolenoidsIn = new frc::JoystickButton(joystick[joystick::hatchPanel], keymap::button::hatchPanelIn);
+    this->buttonClimberFrontToggle = new frc::JoystickButton(joystick[joystick::climber],keymap::button::climberFront);
+    this->buttonClimberBackToggle = new frc::JoystickButton(joystick[joystick::climber],keymap::button::climberBack);
 
     buttonExtakeHigh->WhenPressed(new command::ExtakeOutHigh);
     buttonExtakeHigh->WhenReleased(new command::ExtakeStop);
@@ -58,4 +64,7 @@ OI::OI()
     buttonIntakeToggle->WhenPressed(new command::IntakeToggle);
     buttonSolenoidsOut->WhenPressed(new command::hatchPanelOut);
     buttonSolenoidsIn->WhenPressed(new command::hatchPanelIn);
+
+    buttonClimberFrontToggle->WhenPressed(new command::climberFrontToggle);
+    buttonClimberBackToggle->WhenPressed(new command::climberBackToggle);
 }

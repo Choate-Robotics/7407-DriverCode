@@ -6,14 +6,10 @@
 subsystem::HatchPanel::HatchPanel(const wpi::Twine &name):frc::Subsystem(name){}
 
 void subsystem::HatchPanel::out(){
-    RobotMap::solenoid::left.Set(frc::DoubleSolenoid::kForward);
-    RobotMap::solenoid::top.Set(frc::DoubleSolenoid::kForward);
-    RobotMap::solenoid::right.Set(frc::DoubleSolenoid::kForward);
+    RobotMap::solenoid::hatchPanel.Set(frc::DoubleSolenoid::kForward);
 }
 void subsystem::HatchPanel::in(){
-    RobotMap::solenoid::left.Set(frc::DoubleSolenoid::kReverse);
-    RobotMap::solenoid::top.Set(frc::DoubleSolenoid::kReverse);
-    RobotMap::solenoid::right.Set(frc::DoubleSolenoid::kReverse);
+    RobotMap::solenoid::hatchPanel.Set(frc::DoubleSolenoid::kReverse);
 }
 
 command::hatchPanelIn::hatchPanelIn():frc::Command::Command(*Robot::hatchPanel){}

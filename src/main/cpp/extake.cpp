@@ -17,7 +17,7 @@ void subsystem::Extake::outLow(){
 
 void subsystem::Extake::outHigh(){
     RobotMap::motor::extakeLeft->Set(0.5);
-    RobotMap::motor::extakeLeft->Set(-0.5);
+    RobotMap::motor::extakeRight->Set(-0.5);
     this->runningDirection=FORWARD;
 }
 

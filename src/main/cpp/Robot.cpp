@@ -6,6 +6,7 @@
 #include "subsystems/intake.h"
 #include "subsystems/extake.h"
 #include "subsystems/hatchPanel.h"
+#include "subsystems/climber.h"
 #include <iostream>
 #include <frc/commands/Scheduler.h>
 
@@ -29,11 +30,12 @@ frc::SpeedControllerGroup * motor::right;
 frc::DifferentialDrive * motor::differentialDrive;
 
 
-subsystem::Conveyor* Robot::conveyor = 0;
-subsystem::Extake* Robot::extake = 0;
-subsystem::Drivetrain* Robot::drivetrain = 0;
-subsystem::Intake* Robot::intake = 0;
-subsystem::HatchPanel* Robot::hatchPanel = 0;
+subsystem::Conveyor* Robot::conveyor = nullptr;
+subsystem::Extake* Robot::extake = nullptr;
+subsystem::Drivetrain* Robot::drivetrain = nullptr;
+subsystem::Intake* Robot::intake = nullptr;
+subsystem::HatchPanel* Robot::hatchPanel = nullptr;
+subsystem::Climber* Robot::climber = nullptr;
 
 void Robot::RobotInit()
 {
@@ -53,14 +55,13 @@ void Robot::RobotInit()
     motor::left = new frc::SpeedControllerGroup{*motor::frontLeft,*motor::backLeft};
     motor::right = new frc::SpeedControllerGroup{*motor::frontRight,*motor::backRight};
     motor::differentialDrive = new frc::DifferentialDrive{*motor::left, *motor::right};
-
-    cout<<motor::conveyor<<endl;
-
+    
     Robot::conveyor = new subsystem::Conveyor("Conveyor");
     Robot::extake = new subsystem::Extake("Extake");
     Robot::drivetrain = new subsystem::Drivetrain("Drivetrain");
     Robot::intake = new subsystem::Intake("Intake");
     Robot::hatchPanel = new subsystem::HatchPanel("Hatch Panel");
+    Robot::climber = new subsystem::Climber("Hab Climber");
 
     frc::Scheduler::GetInstance()->RegisterSubsystem(this->drivetrain);
     frc::Scheduler::GetInstance()->RegisterSubsystem(this->conveyor);

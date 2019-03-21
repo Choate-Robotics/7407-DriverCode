@@ -18,4 +18,6 @@ public:
     static frc::JoystickButton *buttonExtakeTiltDown;
     static frc::JoystickButton *buttonSolenoidsOut;
     static frc::JoystickButton *buttonSolenoidsIn;
+    static frc::JoystickButton *buttonClimberFrontToggle;
+    static frc::JoystickButton *buttonClimberBackToggle;
 };

@@ -11,6 +11,7 @@
 #include "subsystems/hatchPanel.h"
 #include "subsystems/intake.h"
 #include "subsystems/extake.h"
+#include "subsystems/climber.h"
 
 class Robot : public frc::TimedRobot
 {
@@ -29,4 +30,5 @@ public:
   static subsystem::Intake *intake;
   static subsystem::HatchPanel *hatchPanel;
   static subsystem::Extake *extake; 
+  static subsystem::Climber *climber;
 };
