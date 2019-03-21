@@ -43,9 +43,10 @@ extern frc::DifferentialDrive * differentialDrive;
 
 namespace solenoid
 {
-static frc::DoubleSolenoid top = frc::DoubleSolenoid{1, 0};
-static frc::DoubleSolenoid left = frc::DoubleSolenoid{2, 3};
-static frc::DoubleSolenoid right = frc::DoubleSolenoid{4, 5};
+static frc::DoubleSolenoid hatchPanel = frc::DoubleSolenoid{1, 0};
+static frc::DoubleSolenoid climberFront = frc::DoubleSolenoid{2, 3};
+static frc::DoubleSolenoid climberBack = frc::DoubleSolenoid{4, 5};
+
 } // namespace solenoid
 
 #if CURRENT_DRIVER == ALEX_AND_PETER
@@ -62,7 +63,8 @@ static constexpr int hatchPanel = PRIMARY_JOYSTICK;
 static constexpr int intake = SECONDARY_JOYSTICK;
 static constexpr int extake = SECONDARY_JOYSTICK;
 static constexpr int extakeTilt = SECONDARY_JOYSTICK;
-static int conveyor = SECONDARY_JOYSTICK;
+static constexpr int conveyor = SECONDARY_JOYSTICK;
+static constexpr int climber = SECONDARY_JOYSTICK; 
 } // namespace joystick
 
 namespace keymap
@@ -78,6 +80,8 @@ static constexpr int intakeTiltUp = 7;
 static constexpr int intakeToggle = 1;
 static constexpr int hatchPanelIn = 6;
 static constexpr int hatchPanelOut = 5;
+static constexpr int climberFront = 9;
+static constexpr int climberBack = 10;
 
 } // namespace buttons
 
