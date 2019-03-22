@@ -14,15 +14,15 @@ frc::PWMTalonSRX leftBack{2};
 frc::PWMTalonSRX rightFront{1};
 frc::PWMTalonSRX rightBack{3};*/
 
-frc::PWMVictorSPX leftFront{0};
+frc::PWMTalonSRX leftFront{0};
 frc::PWMVictorSPX leftBack{2};
 frc::PWMVictorSPX rightFront{1};
-frc::PWMVictorSPX rightBack{3};
+frc::PWMTalonSRX rightBack{3};
 
 frc::PWMVictorSPX conveyorMotor{4};
 frc::PWMVictorSPX intakeMotor{5};
 frc::PWMVictorSPX intakeAngle{6};
-frc::PWMVictorSPX extakeAngle{7};
+frc::PWMTalonSRX extakeAngle{7};
 frc::PWMVictorSPX extakeRight{8};
 frc::PWMVictorSPX extakeLeft{9};
 
@@ -33,8 +33,8 @@ frc::DifferentialDrive RobotDrive(left, right);
 frc::SpeedControllerGroup extake{extakeLeft, extakeRight};
 
 frc::DoubleSolenoid solenoid_top{1, 0};
-frc::DoubleSolenoid solenoid_left{2, 3};
-frc::DoubleSolenoid solenoid_right{4, 5};
+frc::DoubleSolenoid solenoid_front{2, 3};
+frc::DoubleSolenoid solenoid_back{4, 5};
 
 frc::Joystick drive_stick{1};
 frc::Joystick mech_stick{0};
@@ -56,6 +56,11 @@ bool extakeHighRunning = false;
 bool extakeHighButtonAllow = true;
 bool extakeLowRunning = false;
 bool extakeLowButtonAllow = true;
+bool frontRunning = true;
+bool frontButtonAllow = true;
+bool backRunning = true;
+bool backButtonAllow = true;
+
 
 void drive()
 {
@@ -70,7 +75,7 @@ void intakeCargo()
   {
     if(intakeButtonAllow == true)
     {
-      intakeMotor.Set(.5);
+      intakeMotor.Set(-.5);
       intakeRunning = true;
       intakeButtonAllow = false;
     }
@@ -92,7 +97,7 @@ void intakeCargo()
 
 void carryCargo()
 {
-  conveyorMotor.Set(mech_stick.GetRawAxis(3));
+  conveyorMotor.Set(-mech_stick.GetRawAxis(3));
 }
 
 void extakeCargo()
@@ -101,8 +106,8 @@ void extakeCargo()
   {
     if (extakeLowButtonAllow == true)
     {
-      extakeLeft.Set(-.25);
-      extakeRight.Set(.25);
+      extakeLeft.Set(.25);
+      extakeRight.Set(-.25);
       extakeLowRunning = true;
       extakeLowButtonAllow = false;
       std::cout << "low on" << "\n";
@@ -128,8 +133,8 @@ void extakeCargo()
   {
     if (extakeHighButtonAllow == true)
     {
-      extakeLeft.Set(-.5);
-      extakeRight.Set(.5);
+      extakeLeft.Set(.5);
+      extakeRight.Set(-.5);
       extakeHighRunning = true;
       extakeHighButtonAllow = false;
       std::cout << "high on" << "\n";
@@ -198,24 +203,73 @@ void runHatch()
   if (drive_stick.GetRawButton(kDoubleSolenoidForward))
   {
     solenoid_top.Set(frc::DoubleSolenoid::kForward);
-    solenoid_left.Set(frc::DoubleSolenoid::kForward);
-    solenoid_right.Set(frc::DoubleSolenoid::kForward); 
     std::cout << "out" << "\n";
   }
   else if (drive_stick.GetRawButton(kDoubleSolenoidReverse))
   {
     solenoid_top.Set(frc::DoubleSolenoid::kReverse);
-    solenoid_left.Set(frc::DoubleSolenoid::kReverse);
-    solenoid_right.Set(frc::DoubleSolenoid::kReverse);
     std::cout << "in" << "\n";
   }
   else
   {
     solenoid_top.Set(frc::DoubleSolenoid::kOff);
-    solenoid_left.Set(frc::DoubleSolenoid::kOff);
-    solenoid_right.Set(frc::DoubleSolenoid::kOff);
   }
 }
+
+void frontHAB(){
+
+    if(mech_stick.GetRawButton(9) && frontRunning == false)
+    {
+        if(frontButtonAllow == true)
+        {
+        solenoid_front.Set(frc::DoubleSolenoid::kForward);
+        frontRunning = true;
+        frontButtonAllow = false;
+        }
+    }
+    else if(mech_stick.GetRawButton(9) && frontRunning == true)
+    {
+        if(frontButtonAllow == true)
+        {
+        solenoid_front.Set(frc::DoubleSolenoid::kReverse);
+        frontRunning = false;
+        frontButtonAllow = false;
+        }
+    }
+    else
+    {
+        frontButtonAllow = true;
+    }
+
+}
+
+void backHAB(){
+
+    if(mech_stick.GetRawButton(10) && backRunning == false)
+    {
+        if(backButtonAllow == true)
+        {
+        solenoid_back.Set(frc::DoubleSolenoid::kForward);
+        backRunning = true;
+        backButtonAllow = false;
+        }
+    }
+    else if(mech_stick.GetRawButton(10) && backRunning == true)
+    {
+        if(backButtonAllow == true)
+        {
+        solenoid_back.Set(frc::DoubleSolenoid::kReverse);
+        backRunning = false;
+        backButtonAllow = false;
+        }
+    }
+    else
+    {
+        backButtonAllow = true;
+    }
+}
+
+
 
 void Robot::RobotInit()
 {
@@ -227,7 +281,10 @@ void Robot::AutonomousInit() {}
 
 void Robot::AutonomousPeriodic() {}
 
-void Robot::TeleopInit() {}
+void Robot::TeleopInit() {
+ solenoid_front.Set(frc::DoubleSolenoid::kReverse);
+ solenoid_back.Set(frc::DoubleSolenoid::kReverse); 
+ }
 
 void Robot::TeleopPeriodic()
 {
@@ -235,6 +292,8 @@ void Robot::TeleopPeriodic()
   runHatch();
   runIntake();
   runExtake();
+  frontHAB();
+  backHAB();
 }
 
 void Robot::TestPeriodic() {}
