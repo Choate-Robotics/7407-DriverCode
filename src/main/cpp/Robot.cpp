@@ -9,7 +9,7 @@
 #include <frc/DoubleSolenoid.h>
 #include <string.h>
 #include <chrono>
-
+//#define DEBUG
 /*
 frc::PWMTalonSRX leftFront{0};
 frc::PWMTalonSRX leftBack{2};
@@ -46,8 +46,8 @@ int extakeIn = 7;
 int intakeOut = 8;
 int intakeIn = 7;
 int intakeToggle = 2;
-int extakeHigh = 5;
-int extakeLow = 6;
+int extakeHigh = 6;
+int extakeLow = 5;
 
 static constexpr int kDoubleSolenoidForward = 5;
 static constexpr int kDoubleSolenoidReverse = 6;
@@ -58,26 +58,35 @@ bool extakeHighRunning = false;
 bool extakeHighButtonAllow = true;
 bool extakeLowRunning = false;
 bool extakeLowButtonAllow = true;
-bool frontRunning = true;
+bool frontRunning = false;
 bool frontButtonAllow = true;
-bool backRunning = true;
+bool backRunning = false;
 bool backButtonAllow = true;
 
-double speedRamp(double rawPower, std::chrono::milliseconds timeChanged)
+double speedRamp(const double rawPower, std::chrono::milliseconds timeChanged)
 {
     using namespace std::chrono;
     const static auto threshold = milliseconds(1000);
-    if (timeChanged>threshold) return rawPower;
-    double ratio=(double)timeChanged.count()/threshold.count();
-    double output = ratio*rawPower;
-    char buf [100];
-    std::sprintf(buf,"time:%f Ratio: %f, Raw power: %f, converted: %f",timeChanged.count(),ratio,rawPower,output);
-    std::cout<<buf;
+    if (timeChanged > threshold)
+        return rawPower;
+    double ratio = (double)timeChanged.count() / (double)threshold.count();
+    ratio = ratio > 0.4 ? ratio : 0.4;
+    double output = ratio * rawPower;
+#ifdef DEBUG
+    std::printf("time:%i, Ratio: %f, Raw power: %f, converted: %f\n", timeChanged.count(), ratio, rawPower, output);
+    std::cout << rawPower << std::endl;
+#endif
     return output;
-    
 }
 
 std::chrono::time_point<std::chrono::high_resolution_clock> correctionStarted;
+
+void driveNoSpeedRamp()
+{
+    double move = -drive_stick.GetRawAxis(1) * 0.8;
+    double rotate = drive_stick.GetRawAxis(2) * 0.8;
+    RobotDrive.ArcadeDrive(move, rotate);
+}
 
 void drive()
 {
@@ -87,12 +96,19 @@ void drive()
 
     double move = -drive_stick.GetRawAxis(1);
     double rotate = drive_stick.GetRawAxis(2) * .80;
-    if (abs(last_move)<=1.0||move*last_move<0){
-        correctionStarted=high_resolution_clock::now();
+    if (last_move <= 0.01 && last_move >= -0.01)
+    {
+        correctionStarted = high_resolution_clock::now();
+#ifdef DEBUG
+        std::printf("Correction started.\n");
+#endif
     }
-    last_move=move;
+#ifdef DEBUG
+    std::printf("Last move: %f, m*l: %f\n", last_move, move * last_move);
+#endif
+    last_move = move;
 
-    double corrected = speedRamp(move,duration_cast<milliseconds>(high_resolution_clock::now()-correctionStarted));
+    double corrected = speedRamp(move, duration_cast<milliseconds>(high_resolution_clock::now() - correctionStarted));
 
     RobotDrive.ArcadeDrive(corrected, rotate);
     //RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2));
@@ -131,7 +147,7 @@ void carryCargo()
 
 void extakeCargo()
 {
-    if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning == false)
+    if (mech_stick.GetRawButton(extakeLow) && !extakeLowRunning)
     {
         if (extakeLowButtonAllow == true)
         {
@@ -143,7 +159,7 @@ void extakeCargo()
                       << "\n";
         }
     }
-    else if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning == true)
+    else if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning)
     {
         if (extakeLowButtonAllow == true)
         {
@@ -160,7 +176,7 @@ void extakeCargo()
         extakeLowButtonAllow = true;
     }
 
-    if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning == false)
+    if (mech_stick.GetRawButton(extakeHigh) && !extakeHighRunning)
     {
         if (extakeHighButtonAllow == true)
         {
@@ -172,8 +188,8 @@ void extakeCargo()
                       << "\n";
         }
     }
-    else if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning == true)
-    {
+    else if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning )
+       {
         if (extakeHighButtonAllow == true)
         {
             extakeLeft.Set(0);
@@ -236,14 +252,18 @@ void runHatch()
     if (drive_stick.GetRawButton(kDoubleSolenoidForward))
     {
         solenoid_top.Set(frc::DoubleSolenoid::kForward);
+#ifdef DEBUG
         std::cout << "out"
                   << "\n";
+#endif
     }
     else if (drive_stick.GetRawButton(kDoubleSolenoidReverse))
     {
         solenoid_top.Set(frc::DoubleSolenoid::kReverse);
+#ifdef DEBUG
         std::cout << "in"
                   << "\n";
+#endif
     }
     else
     {
@@ -311,9 +331,21 @@ void Robot::RobotInit()
 
 void Robot::RobotPeriodic() {}
 
-void Robot::AutonomousInit() {}
+void Robot::AutonomousInit()
+{
+    solenoid_front.Set(frc::DoubleSolenoid::kReverse);
+    solenoid_back.Set(frc::DoubleSolenoid::kReverse);
+}
 
-void Robot::AutonomousPeriodic() {}
+void Robot::AutonomousPeriodic()
+{
+    driveNoSpeedRamp();
+    runHatch();
+    runIntake();
+    runExtake();
+    frontHAB();
+    backHAB();
+}
 
 void Robot::TeleopInit()
 {
@@ -323,7 +355,7 @@ void Robot::TeleopInit()
 
 void Robot::TeleopPeriodic()
 {
-    drive();
+    driveNoSpeedRamp();
     runHatch();
     runIntake();
     runExtake();
