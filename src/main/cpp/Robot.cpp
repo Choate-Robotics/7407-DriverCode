@@ -8,6 +8,8 @@
 #include <frc/SpeedControllerGroup.h>
 #include <frc/DoubleSolenoid.h>
 #include <string.h>
+#include <chrono>
+
 /*
 frc::PWMTalonSRX leftFront{0};
 frc::PWMTalonSRX leftBack{2};
@@ -61,206 +63,240 @@ bool frontButtonAllow = true;
 bool backRunning = true;
 bool backButtonAllow = true;
 
+double speedRamp(double rawPower, std::chrono::milliseconds timeChanged)
+{
+    using namespace std::chrono;
+    const static auto threshold = milliseconds(1000);
+    if (timeChanged>threshold) return rawPower;
+    double ratio=(double)timeChanged.count()/threshold.count();
+    double output = ratio*rawPower;
+    char buf [100];
+    std::sprintf(buf,"time:%f Ratio: %f, Raw power: %f, converted: %f",timeChanged.count(),ratio,rawPower,output);
+    std::cout<<buf;
+    return output;
+    
+}
+
+std::chrono::time_point<std::chrono::high_resolution_clock> correctionStarted;
 
 void drive()
 {
 
- RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2)*.80);
- //RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2));
+    using namespace std::chrono;
+    static double last_move = 0;
+
+    double move = -drive_stick.GetRawAxis(1);
+    double rotate = drive_stick.GetRawAxis(2) * .80;
+    if (abs(last_move)<=1.0||move*last_move<0){
+        correctionStarted=high_resolution_clock::now();
+    }
+    last_move=move;
+
+    double corrected = speedRamp(move,duration_cast<milliseconds>(high_resolution_clock::now()-correctionStarted));
+
+    RobotDrive.ArcadeDrive(corrected, rotate);
+    //RobotDrive.ArcadeDrive(-drive_stick.GetRawAxis(1), drive_stick.GetRawAxis(2));
 }
 
 void intakeCargo()
 {
-  if(mech_stick.GetRawButton(intakeToggle) && intakeRunning == false)
-  {
-    if(intakeButtonAllow == true)
+    if (mech_stick.GetRawButton(intakeToggle) && intakeRunning == false)
     {
-      intakeMotor.Set(-.5);
-      intakeRunning = true;
-      intakeButtonAllow = false;
+        if (intakeButtonAllow == true)
+        {
+            intakeMotor.Set(-.5);
+            intakeRunning = true;
+            intakeButtonAllow = false;
+        }
     }
-  }
-  else if(mech_stick.GetRawButton(intakeToggle) && intakeRunning == true)
-  {
-    if(intakeButtonAllow == true)
+    else if (mech_stick.GetRawButton(intakeToggle) && intakeRunning == true)
     {
-      intakeMotor.Set(0);
-      intakeRunning = false;
-      intakeButtonAllow = false;
+        if (intakeButtonAllow == true)
+        {
+            intakeMotor.Set(0);
+            intakeRunning = false;
+            intakeButtonAllow = false;
+        }
     }
-  }
-  else
-  {
-    intakeButtonAllow = true;
-  }
+    else
+    {
+        intakeButtonAllow = true;
+    }
 }
 
 void carryCargo()
 {
-  conveyorMotor.Set(-mech_stick.GetRawAxis(3));
+    conveyorMotor.Set(-mech_stick.GetRawAxis(3));
 }
 
 void extakeCargo()
 {
-  if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning == false)
-  {
-    if (extakeLowButtonAllow == true)
+    if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning == false)
     {
-      extakeLeft.Set(.25);
-      extakeRight.Set(-.25);
-      extakeLowRunning = true;
-      extakeLowButtonAllow = false;
-      std::cout << "low on" << "\n";
+        if (extakeLowButtonAllow == true)
+        {
+            extakeLeft.Set(.25);
+            extakeRight.Set(-.25);
+            extakeLowRunning = true;
+            extakeLowButtonAllow = false;
+            std::cout << "low on"
+                      << "\n";
+        }
     }
-  }
-  else if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning == true)
-  {
-    if (extakeLowButtonAllow == true)
+    else if (mech_stick.GetRawButton(extakeLow) && extakeLowRunning == true)
     {
-      extakeLeft.Set(0);
-      extakeRight.Set(0);
-      extakeLowRunning = false;
-      extakeLowButtonAllow = false;
-      std::cout << "low off" << "\n";
+        if (extakeLowButtonAllow == true)
+        {
+            extakeLeft.Set(0);
+            extakeRight.Set(0);
+            extakeLowRunning = false;
+            extakeLowButtonAllow = false;
+            std::cout << "low off"
+                      << "\n";
+        }
     }
-  }
-  else
-  {
-    extakeLowButtonAllow = true;
-  }
+    else
+    {
+        extakeLowButtonAllow = true;
+    }
 
-  if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning == false)
-  {
-    if (extakeHighButtonAllow == true)
+    if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning == false)
     {
-      extakeLeft.Set(.5);
-      extakeRight.Set(-.5);
-      extakeHighRunning = true;
-      extakeHighButtonAllow = false;
-      std::cout << "high on" << "\n";
+        if (extakeHighButtonAllow == true)
+        {
+            extakeLeft.Set(.5);
+            extakeRight.Set(-.5);
+            extakeHighRunning = true;
+            extakeHighButtonAllow = false;
+            std::cout << "high on"
+                      << "\n";
+        }
     }
-  }
-  else if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning == true)
-  {
-    if (extakeHighButtonAllow == true)
+    else if (mech_stick.GetRawButton(extakeHigh) && extakeHighRunning == true)
     {
-      extakeLeft.Set(0);
-      extakeRight.Set(0);
-      extakeHighRunning = false;
-      extakeHighButtonAllow = false;
-      std::cout << "high off" << "\n";
+        if (extakeHighButtonAllow == true)
+        {
+            extakeLeft.Set(0);
+            extakeRight.Set(0);
+            extakeHighRunning = false;
+            extakeHighButtonAllow = false;
+            std::cout << "high off"
+                      << "\n";
+        }
     }
-  }
-  else
-  {
-    extakeHighButtonAllow = true;
-  }
+    else
+    {
+        extakeHighButtonAllow = true;
+    }
 }
 
 void angleExtake()
 {
-  while (mech_stick.GetRawButton(extakeOut))
-  {
-    extakeAngle.Set(.3);
-  }
-  while (mech_stick.GetRawButton(extakeIn))
-  {
-    extakeAngle.Set(-.3);
-  }
-    
-  extakeAngle.Set(0);
+    while (mech_stick.GetRawButton(extakeOut))
+    {
+        extakeAngle.Set(.3);
+    }
+    while (mech_stick.GetRawButton(extakeIn))
+    {
+        extakeAngle.Set(-.3);
+    }
+
+    extakeAngle.Set(0);
 }
 
 void angleIntake()
 {
-  while (drive_stick.GetRawButton(intakeOut))
-  {
-    intakeAngle.Set(.5);
-  }
-  while (drive_stick.GetRawButton(intakeIn))
-  {
-    intakeAngle.Set(-.4);
-  }
-  
-  intakeAngle.Set(-.05);
+    while (drive_stick.GetRawButton(intakeOut))
+    {
+        intakeAngle.Set(.5);
+    }
+    while (drive_stick.GetRawButton(intakeIn))
+    {
+        intakeAngle.Set(-.4);
+    }
+
+    intakeAngle.Set(-.05);
 }
 
-void runIntake() 
+void runIntake()
 {
-  intakeCargo();
-  angleIntake();
-  carryCargo();
+    intakeCargo();
+    angleIntake();
+    carryCargo();
 }
 
 void runExtake()
 {
-  extakeCargo();
-  angleExtake();
+    extakeCargo();
+    angleExtake();
 }
 
 void runHatch()
 {
-  if (drive_stick.GetRawButton(kDoubleSolenoidForward))
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kForward);
-    std::cout << "out" << "\n";
-  }
-  else if (drive_stick.GetRawButton(kDoubleSolenoidReverse))
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kReverse);
-    std::cout << "in" << "\n";
-  }
-  else
-  {
-    solenoid_top.Set(frc::DoubleSolenoid::kOff);
-  }
+    if (drive_stick.GetRawButton(kDoubleSolenoidForward))
+    {
+        solenoid_top.Set(frc::DoubleSolenoid::kForward);
+        std::cout << "out"
+                  << "\n";
+    }
+    else if (drive_stick.GetRawButton(kDoubleSolenoidReverse))
+    {
+        solenoid_top.Set(frc::DoubleSolenoid::kReverse);
+        std::cout << "in"
+                  << "\n";
+    }
+    else
+    {
+        solenoid_top.Set(frc::DoubleSolenoid::kOff);
+    }
 }
 
-void frontHAB(){
+void frontHAB()
+{
 
-    if(mech_stick.GetRawButton(9) && frontRunning == false)
+    if (mech_stick.GetRawButton(9) && frontRunning == false)
     {
-        if(frontButtonAllow == true)
+        if (frontButtonAllow == true)
         {
-        solenoid_front.Set(frc::DoubleSolenoid::kForward);
-        frontRunning = true;
-        frontButtonAllow = false;
+            solenoid_front.Set(frc::DoubleSolenoid::kForward);
+            frontRunning = true;
+            frontButtonAllow = false;
         }
     }
-    else if(mech_stick.GetRawButton(9) && frontRunning == true)
+    else if (mech_stick.GetRawButton(9) && frontRunning == true)
     {
-        if(frontButtonAllow == true)
+        if (frontButtonAllow == true)
         {
-        solenoid_front.Set(frc::DoubleSolenoid::kReverse);
-        frontRunning = false;
-        frontButtonAllow = false;
+            solenoid_front.Set(frc::DoubleSolenoid::kReverse);
+            frontRunning = false;
+            frontButtonAllow = false;
         }
     }
     else
     {
         frontButtonAllow = true;
     }
-
 }
 
-void backHAB(){
+void backHAB()
+{
 
-    if(mech_stick.GetRawButton(10) && backRunning == false)
+    if (mech_stick.GetRawButton(10) && backRunning == false)
     {
-        if(backButtonAllow == true)
+        if (backButtonAllow == true)
         {
-        solenoid_back.Set(frc::DoubleSolenoid::kForward);
-        backRunning = true;
-        backButtonAllow = false;
+            solenoid_back.Set(frc::DoubleSolenoid::kForward);
+            backRunning = true;
+            backButtonAllow = false;
         }
     }
-    else if(mech_stick.GetRawButton(10) && backRunning == true)
+    else if (mech_stick.GetRawButton(10) && backRunning == true)
     {
-        if(backButtonAllow == true)
+        if (backButtonAllow == true)
         {
-        solenoid_back.Set(frc::DoubleSolenoid::kReverse);
-        backRunning = false;
-        backButtonAllow = false;
+            solenoid_back.Set(frc::DoubleSolenoid::kReverse);
+            backRunning = false;
+            backButtonAllow = false;
         }
     }
     else
@@ -268,8 +304,6 @@ void backHAB(){
         backButtonAllow = true;
     }
 }
-
-
 
 void Robot::RobotInit()
 {
@@ -281,25 +315,27 @@ void Robot::AutonomousInit() {}
 
 void Robot::AutonomousPeriodic() {}
 
-void Robot::TeleopInit() {
- solenoid_front.Set(frc::DoubleSolenoid::kReverse);
- solenoid_back.Set(frc::DoubleSolenoid::kReverse); 
- }
+void Robot::TeleopInit()
+{
+    solenoid_front.Set(frc::DoubleSolenoid::kReverse);
+    solenoid_back.Set(frc::DoubleSolenoid::kReverse);
+}
 
 void Robot::TeleopPeriodic()
 {
-  drive();
-  runHatch();
-  runIntake();
-  runExtake();
-  frontHAB();
-  backHAB();
+    drive();
+    runHatch();
+    runIntake();
+    runExtake();
+    frontHAB();
+    backHAB();
 }
 
 void Robot::TestPeriodic() {}
 
 #ifndef RUNNING_FRC_TESTS
-int main() { return frc::StartRobot<Robot>(); }
+int main()
+{
+    return frc::StartRobot<Robot>();
+}
 #endif
-
-
