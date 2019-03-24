@@ -43,9 +43,9 @@ extern frc::DifferentialDrive * differentialDrive;
 
 namespace solenoid
 {
-static frc::DoubleSolenoid hatchPanel = frc::DoubleSolenoid{1, 0};
-static frc::DoubleSolenoid climberFront = frc::DoubleSolenoid{2, 3};
-static frc::DoubleSolenoid climberBack = frc::DoubleSolenoid{4, 5};
+extern frc::DoubleSolenoid * hatchPanel;
+extern frc::DoubleSolenoid * climberFront; 
+extern frc::DoubleSolenoid * climberBack;
 
 } // namespace solenoid
 
@@ -77,7 +77,7 @@ static constexpr int extakeHigh = 5;
 static constexpr int extakeLow = 6;
 static constexpr int intakeTiltDown = 8;
 static constexpr int intakeTiltUp = 7;
-static constexpr int intakeToggle = 1;
+static constexpr int intakeToggle = 2;
 static constexpr int hatchPanelIn = 6;
 static constexpr int hatchPanelOut = 5;
 static constexpr int climberFront = 9;

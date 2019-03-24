@@ -5,10 +5,10 @@
 namespace command
 {
 
-class ExtakeOutLow : public frc::Command
+class ExtakeOutSlow : public frc::Command
 {
   public:
-    ExtakeOutLow();
+    ExtakeOutSlow();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
@@ -16,10 +16,10 @@ class ExtakeOutLow : public frc::Command
     void Interrupted() override;
 };
 
-class ExtakeOutHigh : public frc::Command
+class ExtakeOutFast : public frc::Command
 {
   public:
-    ExtakeOutHigh();
+    ExtakeOutFast();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;

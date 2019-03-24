@@ -2,6 +2,7 @@
 #include "subsystems/intake.h"
 #include "RobotMap.h"
 #include "Robot.h"
+#include <stdio.h>
 
 subsystem::Intake::Intake(const wpi::Twine & name):frc::Subsystem(name){}
 void subsystem::Intake::InitDefaultCommand(){}
@@ -10,12 +11,12 @@ subsystem::Intake::Direction subsystem::Intake::runningDirection = STOPPED;
 subsystem::Intake::Direction subsystem::Intake::tiltingDirection = STOPPED;
 
 void subsystem::Intake::in(){
-    RobotMap::motor::intake->Set(0.5);
+    RobotMap::motor::intake->Set(-0.5);
     this->runningDirection=FORWARD;
 }
 
 void subsystem::Intake::out(){
-    RobotMap::motor::intake->Set(-0.5);
+    RobotMap::motor::intake->Set(0.5);
     this->runningDirection=REVERSED;
 }
 
@@ -25,11 +26,13 @@ void subsystem::Intake::stop(){
 }
 
 void subsystem::Intake::toggle(){
-    if (runningDirection==FORWARD){
-        out();
-    } else if (runningDirection==REVERSED){
+    if (runningDirection==STOPPED){
         in();
-    } 
+        this->runningDirection=FORWARD;
+    } else {
+        stop();
+        this->runningDirection=STOPPED;
+    }
 }
 
 void subsystem::Intake::tiltUp(){

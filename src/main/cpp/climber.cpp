@@ -7,19 +7,19 @@ subsystem::Climber::Climber(const wpi::Twine &name):frc::Subsystem(name){}
 
 void subsystem::Climber::frontToggle(){
     if (frontFired){
-        RobotMap::solenoid::climberFront.Set(frc::DoubleSolenoid::kReverse);
+        RobotMap::solenoid::climberFront->Set(frc::DoubleSolenoid::kReverse);
         this->frontFired=false;
     } else {
-        RobotMap::solenoid::climberFront.Set(frc::DoubleSolenoid::kForward);
+        RobotMap::solenoid::climberFront->Set(frc::DoubleSolenoid::kForward);
         this->frontFired=true;
     }
 }
 void subsystem::Climber::backToggle(){
     if (backFired){
-        RobotMap::solenoid::climberBack.Set(frc::DoubleSolenoid::kReverse);
+        RobotMap::solenoid::climberBack->Set(frc::DoubleSolenoid::kReverse);
         this->backFired=false;
     } else {
-        RobotMap::solenoid::climberBack.Set(frc::DoubleSolenoid::kForward);
+        RobotMap::solenoid::climberBack->Set(frc::DoubleSolenoid::kForward);
         this->backFired=true;
     }
 }

@@ -24,6 +24,8 @@ public:
   void TeleopInit() override;
   void TeleopPeriodic() override;
   void TestPeriodic() override;
+  void DisabledInit() override;
+  void DisabledPeriodic() override;
   static OI *oi;
   static subsystem::Conveyor *conveyor;
   static subsystem::Drivetrain *drivetrain;

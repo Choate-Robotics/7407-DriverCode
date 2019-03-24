@@ -43,11 +43,10 @@ OI::OI()
     this->buttonClimberFrontToggle = new frc::JoystickButton(joystick[joystick::climber],keymap::button::climberFront);
     this->buttonClimberBackToggle = new frc::JoystickButton(joystick[joystick::climber],keymap::button::climberBack);
 
-    buttonExtakeHigh->WhenPressed(new command::ExtakeOutHigh);
-    buttonExtakeHigh->WhenReleased(new command::ExtakeStop);
 
-    buttonExtakeLow->WhenPressed(new command::ExtakeOutLow);
-    buttonExtakeLow->WhenReleased(new command::ExtakeStop);
+
+    buttonExtakeHigh->WhenPressed(new command::ExtakeOutFast);
+    buttonExtakeLow->WhenPressed(new command::ExtakeOutSlow);
 
     buttonExtakeTiltDown->WhenPressed(new command::ExtakeTiltDown);
     buttonExtakeTiltDown->WhenReleased(new command::ExtakeTiltStop);

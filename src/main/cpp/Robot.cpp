@@ -29,6 +29,10 @@ frc::SpeedControllerGroup * motor::left;
 frc::SpeedControllerGroup * motor::right;
 frc::DifferentialDrive * motor::differentialDrive;
 
+frc::DoubleSolenoid * solenoid::climberBack;
+frc::DoubleSolenoid * solenoid::climberFront;
+frc::DoubleSolenoid * solenoid::hatchPanel;
+
 
 subsystem::Conveyor* Robot::conveyor = nullptr;
 subsystem::Extake* Robot::extake = nullptr;
@@ -55,7 +59,15 @@ void Robot::RobotInit()
     motor::left = new frc::SpeedControllerGroup{*motor::frontLeft,*motor::backLeft};
     motor::right = new frc::SpeedControllerGroup{*motor::frontRight,*motor::backRight};
     motor::differentialDrive = new frc::DifferentialDrive{*motor::left, *motor::right};
-    
+
+    solenoid::hatchPanel= new frc::DoubleSolenoid{1, 0};
+    solenoid::climberFront= new frc::DoubleSolenoid{2,3};
+    solenoid::climberBack=new frc::DoubleSolenoid{4,5};
+    solenoid::hatchPanel->Set(frc::DoubleSolenoid::kForward);
+    solenoid::climberFront->Set(frc::DoubleSolenoid::kReverse);
+    solenoid::climberBack->Set(frc::DoubleSolenoid::kReverse);
+
+
     Robot::conveyor = new subsystem::Conveyor("Conveyor");
     Robot::extake = new subsystem::Extake("Extake");
     Robot::drivetrain = new subsystem::Drivetrain("Drivetrain");
@@ -73,6 +85,8 @@ void Robot::RobotInit()
 void Robot::RobotPeriodic(){
     frc::Scheduler::GetInstance()->Run();
 }
+void Robot::DisabledInit(){}
+void Robot::DisabledPeriodic(){}
 void Robot::AutonomousInit(){}
 void Robot::AutonomousPeriodic(){
     frc::Scheduler::GetInstance()->Run();

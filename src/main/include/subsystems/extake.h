@@ -9,15 +9,17 @@ class Extake : public frc::Subsystem{
 public:
 
     enum Direction{
-            STOPPED, 
-            FORWARD, // out, up
+            STOPPED,
+            FORWARD, 
+            FORWARD_SLOW, // out, up
+            FORWARD_FAST,
             REVERSED, // in, down
         };
 
     Extake(const wpi::Twine &);
     void InitDefaultCommand() override;
-    void outLow();
-    void outHigh();
+    void outSlow();
+    void outFast();
     void stop();
 
     void tiltDown();
