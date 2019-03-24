@@ -83,8 +83,8 @@ std::chrono::time_point<std::chrono::high_resolution_clock> correctionStarted;
 
 void driveNoSpeedRamp()
 {
-    double move = -drive_stick.GetRawAxis(1) * 0.8;
-    double rotate = drive_stick.GetRawAxis(2) * 0.8;
+    double move = -drive_stick.GetRawAxis(1) * 0.84;
+    double rotate = drive_stick.GetRawAxis(2) * 0.9;
     RobotDrive.ArcadeDrive(move, rotate);
 }
 
