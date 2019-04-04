@@ -4,7 +4,8 @@
 #include "RobotMap.h"
 #include "OI.h"
 #include <frc/drive/DifferentialDrive.h>
-//subsystem::Drivetrain::DriveStyle subsystem::Drivetrain::currentDriveStyle = ARCADE;
+
+subsystem::Drivetrain::DriveStyle subsystem::Drivetrain::currentDriveStyle = ARCADE;
 
 subsystem::Drivetrain::Drivetrain(const wpi::Twine &name) : frc::Subsystem(name) {}
 void subsystem::Drivetrain::InitDefaultCommand(){ SetDefaultCommand(new command::DriveArcade); }

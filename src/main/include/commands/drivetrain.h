@@ -16,7 +16,6 @@ class DriveArcade : public frc::Command
     bool IsFinished() override;
     void End() override;
     void Interrupted() override;
-    bool IsInterruptable() override;
 };
 
 class DriveTank : public frc::Command
@@ -29,8 +28,6 @@ class DriveTank : public frc::Command
     bool IsFinished() override;
     void End() override;
     void Interrupted() override;
-    bool IsInterruptable() override;
-    
 };
 
 } // namespace command
