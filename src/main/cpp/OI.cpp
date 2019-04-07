@@ -15,7 +15,7 @@ frc::JoystickButton *OI::buttonIntakeToggle = nullptr;
 frc::JoystickButton *OI::buttonIntakeTiltUp = nullptr;
 frc::JoystickButton *OI::buttonIntakeTiltDown = nullptr;
 
-frc::JoystickButton *OI::buttonExtakeHigh =nullptr;
+frc::JoystickButton *OI::buttonExtakeStop =nullptr;
 frc::JoystickButton *OI::buttonExtakeLow = nullptr;
 frc::JoystickButton *OI::buttonExtakeTiltUp = nullptr;
 frc::JoystickButton *OI::buttonExtakeTiltDown = nullptr;
@@ -34,7 +34,7 @@ OI::OI()
     this->buttonIntakeTiltUp = new frc::JoystickButton(joystick[joystick::intakeTilt], keymap::button::intakeTiltUp);
     this->buttonIntakeTiltDown = new frc::JoystickButton(joystick[joystick::intakeTilt], keymap::button::intakeTiltDown);
 
-    this->buttonExtakeHigh = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeHigh);
+    this->buttonExtakeStop = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeStop);
     this->buttonExtakeLow = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeLow);
     this->buttonExtakeTiltUp = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeTiltUp);
     this->buttonExtakeTiltDown = new frc::JoystickButton(joystick[joystick::extake], keymap::button::extakeTiltDown);
@@ -45,8 +45,9 @@ OI::OI()
 
 
 
-    buttonExtakeHigh->WhenPressed(new command::ExtakeOutFast);
+    buttonExtakeStop->WhenPressed(new command::ExtakeStop);
     buttonExtakeLow->WhenPressed(new command::ExtakeOutSlow);
+
 
     buttonExtakeTiltDown->WhenPressed(new command::ExtakeTiltDown);
     buttonExtakeTiltDown->WhenReleased(new command::ExtakeTiltStop);

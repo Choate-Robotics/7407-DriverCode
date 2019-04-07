@@ -36,17 +36,17 @@ void subsystem::Intake::toggle(){
 }
 
 void subsystem::Intake::tiltUp(){
-    RobotMap::motor::intakeTilt->Set(0.5);
+    RobotMap::motor::intakeTilt->Set(-0.5);
     this->tiltingDirection=FORWARD;
 }
 
 void subsystem::Intake::tiltDown(){
-    RobotMap::motor::intakeTilt->Set(-0.5);
+    RobotMap::motor::intakeTilt->Set(0.5);
     this->tiltingDirection=REVERSED;
 }
 
 void subsystem::Intake::tiltStop(){
-    RobotMap::motor::intakeTilt->Set(0);
+    RobotMap::motor::intakeTilt->Set(-0.05);
     this->tiltingDirection=STOPPED;
 }
 

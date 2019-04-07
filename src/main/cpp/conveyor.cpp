@@ -10,7 +10,7 @@ using namespace std;
 subsystem::Conveyor::Conveyor(const wpi::Twine &name) : frc::Subsystem(name) {}
 void subsystem::Conveyor::move()
 {
-    RobotMap::motor::conveyor->Set(-Robot::oi->joystick[RobotMap::joystick::conveyor]->GetRawAxis(RobotMap::keymap::axis::conveyor));
+    RobotMap::motor::conveyor->Set(-Robot::oi->joystick[RobotMap::joystick::conveyor]->GetRawAxis(RobotMap::keymap::axis::conveyor)*.7);
 }
 
 command::ConveyorMove::ConveyorMove() : frc::Command::Command(*Robot::conveyor) {}

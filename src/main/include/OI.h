@@ -12,7 +12,7 @@ public:
     static frc::JoystickButton *buttonIntakeTiltDown;
     static frc::JoystickButton *buttonIntakeTiltUp;
 
-    static frc::JoystickButton *buttonExtakeHigh;
+    static frc::JoystickButton *buttonExtakeStop;
     static frc::JoystickButton *buttonExtakeLow;
     static frc::JoystickButton *buttonExtakeTiltUp;
     static frc::JoystickButton *buttonExtakeTiltDown;
