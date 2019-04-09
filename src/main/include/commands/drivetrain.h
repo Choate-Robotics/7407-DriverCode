@@ -6,14 +6,28 @@
 namespace command
 {
 
-class Drive : public frc::Command
+class DriveArcade : public frc::Command
 {
   public:
-    Drive();
+
+    DriveArcade();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
     void End() override;
     void Interrupted() override;
 };
+
+class DriveTank : public frc::Command
+{
+  public:
+
+    DriveTank();
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+};
+
 } // namespace command
