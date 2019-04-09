@@ -15,7 +15,7 @@ frc::JoystickButton *OI::buttonIntakeToggle = nullptr;
 frc::JoystickButton *OI::buttonIntakeTiltUp = nullptr;
 frc::JoystickButton *OI::buttonIntakeTiltDown = nullptr;
 
-frc::JoystickButton *OI::buttonExtakeStop =nullptr;
+frc::JoystickButton *OI::buttonExtakeStop = nullptr;
 frc::JoystickButton *OI::buttonExtakeLow = nullptr;
 frc::JoystickButton *OI::buttonExtakeTiltUp = nullptr;
 frc::JoystickButton *OI::buttonExtakeTiltDown = nullptr;

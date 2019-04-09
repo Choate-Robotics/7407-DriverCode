@@ -29,7 +29,7 @@ class ExtakeOutFast : public frc::Command
 
 class ExtakeStop:public frc::Command{
   public:
-  ExtakeStop();
+    ExtakeStop();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
@@ -61,7 +61,7 @@ class ExtakeTiltDown : public frc::Command
 
 class ExtakeTiltStop:public frc::Command{
   public:
-  ExtakeTiltStop();
+    ExtakeTiltStop();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
