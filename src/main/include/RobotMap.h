@@ -72,6 +72,8 @@ namespace keymap
 {
 namespace button
 {
+static constexpr int hatchPanelRollerIntake = 8;
+static constexpr int hatchPanelRollerExtake = 7;
 static constexpr int extakeTiltDown = 7;
 static constexpr int extakeTiltUp = 8;
 static constexpr int extakeStop = 5;
@@ -83,8 +85,6 @@ static constexpr int hatchPanelIn = 6;
 static constexpr int hatchPanelOut = 5;
 static constexpr int climberFront = 9;
 static constexpr int climberBack = 10;
-static constexpr int hatchPanelRollerIntake = 8;
-static constexpr int hatchPanelRollerExtake = 7;
 
 } // namespace buttons
 

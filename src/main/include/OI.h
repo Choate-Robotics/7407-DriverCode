@@ -11,6 +11,8 @@ public:
     static frc::JoystickButton *buttonIntakeToggle;
     static frc::JoystickButton *buttonIntakeTiltDown;
     static frc::JoystickButton *buttonIntakeTiltUp;
+    static frc::JoystickButton *buttonHatchRollerIn;
+    static frc::JoystickButton *buttonHatchRollerOut;
 
     static frc::JoystickButton *buttonExtakeStop;
     static frc::JoystickButton *buttonExtakeLow;
@@ -20,6 +22,4 @@ public:
     static frc::JoystickButton *buttonSolenoidsIn;
     static frc::JoystickButton *buttonClimberFrontToggle;
     static frc::JoystickButton *buttonClimberBackToggle;
-    static frc::JoystickButton *buttonHatchRollerIn;
-    static frc::JoystickButton *buttonHatchRollerOut;
 };

@@ -44,8 +44,8 @@ OI::OI()
     this->buttonSolenoidsIn = new frc::JoystickButton(joystick[joystick::hatchPanel], keymap::button::hatchPanelIn);
     this->buttonClimberFrontToggle = new frc::JoystickButton(joystick[joystick::climber],keymap::button::climberFront);
     this->buttonClimberBackToggle = new frc::JoystickButton(joystick[joystick::climber],keymap::button::climberBack);
-    this->buttonHatchRollerIn = new frc::JoystickButton(joystick[joystick::climber],keymap::button::hatchPanelRollerIntake);
-    this->buttonHatchRollerOut = new frc::JoystickButton(joystick[joystick::climber],keymap::button::hatchPanelRollerExtake);
+    this->buttonHatchRollerIn = new frc::JoystickButton(joystick[joystick::hatchPanelRoller],keymap::button::hatchPanelRollerIntake);
+    this->buttonHatchRollerOut = new frc::JoystickButton(joystick[joystick::hatchPanelRoller],keymap::button::hatchPanelRollerExtake);
 
 
 
