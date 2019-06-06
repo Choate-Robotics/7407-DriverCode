@@ -16,6 +16,7 @@ public:
 
     static frc::JoystickButton *buttonExtakeStop;
     static frc::JoystickButton *buttonExtakeLow;
+    static frc::JoystickButton *buttonExtakeHigh;
     static frc::JoystickButton *buttonExtakeTiltUp;
     static frc::JoystickButton *buttonExtakeTiltDown;
     static frc::JoystickButton *buttonSolenoidsOut;

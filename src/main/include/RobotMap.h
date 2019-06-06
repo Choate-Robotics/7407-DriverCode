@@ -78,6 +78,7 @@ static constexpr int extakeTiltDown = 7;
 static constexpr int extakeTiltUp = 8;
 static constexpr int extakeStop = 5;
 static constexpr int extakeLow = 6;
+static constexpr int extakeHigh = 4;
 static constexpr int intakeTiltDown = 3;
 static constexpr int intakeTiltUp = 1;
 static constexpr int intakeToggle = 2;
