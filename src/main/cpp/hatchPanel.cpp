@@ -14,15 +14,15 @@ void subsystem::HatchPanel::in(){
 }
 
 void subsystem::HatchPanel::rollerIntake(){
-    RobotMap::motor::hatchRoller->Set(-0.6);
+    RobotMap::motor::hatchRoller->Set(0.6);
 }
 
 void subsystem::HatchPanel::rollerExtake(){
-    RobotMap::motor::hatchRoller->Set(0.8);
+    RobotMap::motor::hatchRoller->Set(-0.8);
 }
 
 void subsystem::HatchPanel::rollerHold(){
-    RobotMap::motor::hatchRoller->Set(-0.05);
+    RobotMap::motor::hatchRoller->Set(0.05);
 }
 
 void subsystem::HatchPanel::rollerOff(){
