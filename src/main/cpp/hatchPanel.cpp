@@ -13,19 +13,19 @@ void subsystem::HatchPanel::in(){
     RobotMap::solenoid::hatchPanel->Set(frc::DoubleSolenoid::kReverse);
 }
 
-void subsystem::HatchPanel::intake(){
+void subsystem::HatchPanel::rollerIntake(){
     RobotMap::motor::hatchRoller->Set(-0.6);
 }
 
-void subsystem::HatchPanel::extake(){
+void subsystem::HatchPanel::rollerExtake(){
     RobotMap::motor::hatchRoller->Set(0.8);
 }
 
-void subsystem::HatchPanel::hold(){
+void subsystem::HatchPanel::rollerHold(){
     RobotMap::motor::hatchRoller->Set(-0.05);
 }
 
-void subsystem::HatchPanel::off(){
+void subsystem::HatchPanel::rollerOff(){
     RobotMap::motor::hatchRoller->Set(0);
 }
 
@@ -43,30 +43,30 @@ bool command::hatchPanelOut::IsFinished(){ return true; }
 void command::hatchPanelOut::End(){}
 void command::hatchPanelOut::Interrupted(){}
 
-command::hatchPanelIntake::hatchPanelIntake():frc::Command::Command(*Robot::hatchPanel){}
-void command::hatchPanelIntake::Initialize(){}
-void command::hatchPanelIntake::Execute(){ Robot::hatchPanel->intake(); }
-bool command::hatchPanelIntake::IsFinished(){ return true; }
-void command::hatchPanelIntake::End(){}
-void command::hatchPanelIntake::Interrupted(){}
+command::hatchPanelRollerIntake::hatchPanelRollerIntake():frc::Command::Command(*Robot::hatchPanel){}
+void command::hatchPanelRollerIntake::Initialize(){}
+void command::hatchPanelRollerIntake::Execute(){ Robot::hatchPanel->rollerIntake(); }
+bool command::hatchPanelRollerIntake::IsFinished(){ return true; }
+void command::hatchPanelRollerIntake::End(){}
+void command::hatchPanelRollerIntake::Interrupted(){}
 
-command::hatchPanelExtake::hatchPanelExtake():frc::Command::Command(*Robot::hatchPanel){}
-void command::hatchPanelExtake::Initialize(){}
-void command::hatchPanelExtake::Execute(){ Robot::hatchPanel->extake(); }
-bool command::hatchPanelExtake::IsFinished(){ return true; }
-void command::hatchPanelExtake::End(){}
-void command::hatchPanelExtake::Interrupted(){}
+command::hatchPanelRollerExtake::hatchPanelRollerExtake():frc::Command::Command(*Robot::hatchPanel){}
+void command::hatchPanelRollerExtake::Initialize(){}
+void command::hatchPanelRollerExtake::Execute(){ Robot::hatchPanel->rollerExtake(); }
+bool command::hatchPanelRollerExtake::IsFinished(){ return true; }
+void command::hatchPanelRollerExtake::End(){}
+void command::hatchPanelRollerExtake::Interrupted(){}
 
-command::hatchPanelHold::hatchPanelHold():frc::Command::Command(*Robot::hatchPanel){}
-void command::hatchPanelHold::Initialize(){}
-void command::hatchPanelHold::Execute(){ Robot::hatchPanel->hold(); }
-bool command::hatchPanelHold::IsFinished(){ return true; }
-void command::hatchPanelHold::End(){}
-void command::hatchPanelHold::Interrupted(){}
+command::hatchPanelRollerHold::hatchPanelRollerHold():frc::Command::Command(*Robot::hatchPanel){}
+void command::hatchPanelRollerHold::Initialize(){}
+void command::hatchPanelRollerHold::Execute(){ Robot::hatchPanel->rollerHold(); }
+bool command::hatchPanelRollerHold::IsFinished(){ return true; }
+void command::hatchPanelRollerHold::End(){}
+void command::hatchPanelRollerHold::Interrupted(){}
 
-command::hatchPanelOff::hatchPanelOff():frc::Command::Command(*Robot::hatchPanel){}
-void command::hatchPanelOff::Initialize(){}
-void command::hatchPanelOff::Execute(){ Robot::hatchPanel->off(); }
-bool command::hatchPanelOff::IsFinished(){ return true; }
-void command::hatchPanelOff::End(){}
-void command::hatchPanelOff::Interrupted(){}
+command::hatchPanelRollerOff::hatchPanelRollerOff():frc::Command::Command(*Robot::hatchPanel){}
+void command::hatchPanelRollerOff::Initialize(){}
+void command::hatchPanelRollerOff::Execute(){ Robot::hatchPanel->rollerOff(); }
+bool command::hatchPanelRollerOff::IsFinished(){ return true; }
+void command::hatchPanelRollerOff::End(){}
+void command::hatchPanelRollerOff::Interrupted(){}

@@ -26,10 +26,10 @@ class hatchPanelOut : public frc::Command
     void Interrupted() override;
 };
 
-class hatchPanelIntake : public frc::Command
+class hatchPanelRollerIntake : public frc::Command
 {
   public:
-    hatchPanelIntake();
+    hatchPanelRollerIntake();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
@@ -37,10 +37,10 @@ class hatchPanelIntake : public frc::Command
     void Interrupted() override;
 };
 
-class hatchPanelExtake : public frc::Command
+class hatchPanelRollerExtake : public frc::Command
 {
   public:
-    hatchPanelExtake();
+    hatchPanelRollerExtake();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
@@ -48,10 +48,10 @@ class hatchPanelExtake : public frc::Command
     void Interrupted() override;
 };
 
-class hatchPanelHold : public frc::Command
+class hatchPanelRollerHold : public frc::Command
 {
   public:
-    hatchPanelHold();
+    hatchPanelRollerHold();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;
@@ -59,10 +59,10 @@ class hatchPanelHold : public frc::Command
     void Interrupted() override;
 };
 
-class hatchPanelOff : public frc::Command
+class hatchPanelRollerOff : public frc::Command
 {
   public:
-    hatchPanelOff();
+    hatchPanelRollerOff();
     void Initialize() override;
     void Execute() override;
     bool IsFinished() override;

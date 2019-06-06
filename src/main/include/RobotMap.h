@@ -58,6 +58,7 @@ static constexpr int portSecondary = 1;
 
 static constexpr int drivetrain = PRIMARY_JOYSTICK;
 static constexpr int hatchPanel = PRIMARY_JOYSTICK;
+static constexpr int hatchPanelRoller = PRIMARY_JOYSTICK;
 
 static constexpr int intakeTilt = SECONDARY_JOYSTICK;
 static constexpr int intake = SECONDARY_JOYSTICK;
@@ -82,8 +83,8 @@ static constexpr int hatchPanelIn = 6;
 static constexpr int hatchPanelOut = 5;
 static constexpr int climberFront = 9;
 static constexpr int climberBack = 10;
-static constexpr int hatchPanelIntake = 8;
-static constexpr int hatchPanelExtake = 7;
+static constexpr int hatchPanelRollerIntake = 8;
+static constexpr int hatchPanelRollerExtake = 7;
 
 } // namespace buttons
 

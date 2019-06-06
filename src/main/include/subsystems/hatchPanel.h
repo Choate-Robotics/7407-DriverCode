@@ -13,9 +13,9 @@ public:
     void in();
     void out();
 
-    void intake();
-    void extake();
-    void hold();
-    void off();
+    inline void rollerIntake();
+    inline void rollerExtake();
+    inline void rollerHold();
+    inline void rollerOff();
 };
 }
