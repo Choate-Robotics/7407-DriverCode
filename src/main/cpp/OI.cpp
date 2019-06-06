@@ -23,6 +23,8 @@ frc::JoystickButton *OI::buttonSolenoidsOut = nullptr;
 frc::JoystickButton *OI::buttonSolenoidsIn = nullptr;
 frc::JoystickButton *OI::buttonClimberFrontToggle = nullptr;
 frc::JoystickButton *OI::buttonClimberBackToggle = nullptr;
+frc::JoystickButton *OI::buttonHatchRollerIn = nullptr;
+frc::JoystickButton *OI::buttonHatchRollerOut = nullptr;
 
 OI::OI()
 {
@@ -42,6 +44,8 @@ OI::OI()
     this->buttonSolenoidsIn = new frc::JoystickButton(joystick[joystick::hatchPanel], keymap::button::hatchPanelIn);
     this->buttonClimberFrontToggle = new frc::JoystickButton(joystick[joystick::climber],keymap::button::climberFront);
     this->buttonClimberBackToggle = new frc::JoystickButton(joystick[joystick::climber],keymap::button::climberBack);
+    this->buttonHatchRollerIn = new frc::JoystickButton(joystick[joystick::climber],keymap::button::hatchPanelIntake);
+    this->buttonHatchRollerOut = new frc::JoystickButton(joystick[joystick::climber],keymap::button::hatchPanelExtake);
 
 
 
@@ -67,4 +71,7 @@ OI::OI()
 
     buttonClimberFrontToggle->WhenPressed(new command::climberFrontToggle);
     buttonClimberBackToggle->WhenPressed(new command::climberBackToggle);
+
+    buttonHatchRollerIn->WhenPressed(new command::hatchPanelIntake);
+    buttonHatchRollerOut->WhenPressed(new command::hatchPanelExtake);
 }

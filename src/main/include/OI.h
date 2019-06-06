@@ -20,4 +20,6 @@ public:
     static frc::JoystickButton *buttonSolenoidsIn;
     static frc::JoystickButton *buttonClimberFrontToggle;
     static frc::JoystickButton *buttonClimberBackToggle;
+    static frc::JoystickButton *buttonHatchRollerIn;
+    static frc::JoystickButton *buttonHatchRollerOut;
 };

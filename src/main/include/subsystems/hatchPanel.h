@@ -12,5 +12,10 @@ public:
     void InitDefaultCommand() override;
     void in();
     void out();
+
+    void intake();
+    void extake();
+    void hold();
+    void off();
 };
 }
