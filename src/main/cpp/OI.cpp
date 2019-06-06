@@ -73,5 +73,9 @@ OI::OI()
     buttonClimberBackToggle->WhenPressed(new command::climberBackToggle);
 
     buttonHatchRollerIn->WhenPressed(new command::hatchPanelIntake);
+    buttonHatchRollerIn->WhenReleased(new command::hatchPanelHold);
+
     buttonHatchRollerOut->WhenPressed(new command::hatchPanelExtake);
+    buttonHatchRollerOut->WhenReleased(new command::hatchPanelOff);
+
 }
