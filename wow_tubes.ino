@@ -133,9 +133,3 @@ void choateColors(uint8_t wait){
   }
 }
 
-void randomeChangeyThing() {
-
-
-
-
-}
