@@ -18,7 +18,7 @@ void command::DriveArcade::Initialize() {
 void command::DriveArcade::Execute()
 {
     RobotMap::motor::differentialDrive->ArcadeDrive(
-        -Robot::oi->joystick[RobotMap::joystick::drivetrain]->GetRawAxis(RobotMap::keymap::axis::driveX),
+        -Robot::oi->joystick[RobotMap::joystick::drivetrain]->GetRawAxis(RobotMap::keymap::axis::driveX)*.85,
         Robot::oi->joystick[RobotMap::joystick::drivetrain]->GetRawAxis(RobotMap::keymap::axis::driveY)*.80
     );
 }

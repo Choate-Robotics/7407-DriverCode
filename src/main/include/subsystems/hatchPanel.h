@@ -12,5 +12,10 @@ public:
     void InitDefaultCommand() override;
     void in();
     void out();
+
+    inline void rollerIntake();
+    inline void rollerExtake();
+    inline void rollerHold();
+    inline void rollerOff();
 };
 }

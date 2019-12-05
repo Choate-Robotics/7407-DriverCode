@@ -32,8 +32,8 @@ extern frc::PWMVictorSPX * conveyor;
 extern frc::PWMVictorSPX * intake;
 extern frc::PWMVictorSPX * intakeTilt;
 extern frc::PWMVictorSPX * extakeTilt;
-extern frc::PWMVictorSPX * extakeLeft;
-extern frc::PWMVictorSPX * extakeRight;
+extern frc::PWMVictorSPX * extake;
+extern frc::PWMVictorSPX * hatchRoller;
 extern frc::SpeedControllerGroup * left;
 extern frc::SpeedControllerGroup * right;
 extern frc::DifferentialDrive * differentialDrive;
@@ -57,9 +57,10 @@ static constexpr int portPrimary = 0;
 static constexpr int portSecondary = 1;
 
 static constexpr int drivetrain = PRIMARY_JOYSTICK;
-static constexpr int intakeTilt = PRIMARY_JOYSTICK;
 static constexpr int hatchPanel = PRIMARY_JOYSTICK;
+static constexpr int hatchPanelRoller = PRIMARY_JOYSTICK;
 
+static constexpr int intakeTilt = SECONDARY_JOYSTICK;
 static constexpr int intake = SECONDARY_JOYSTICK;
 static constexpr int extake = SECONDARY_JOYSTICK;
 static constexpr int extakeTilt = SECONDARY_JOYSTICK;
@@ -71,12 +72,15 @@ namespace keymap
 {
 namespace button
 {
+static constexpr int hatchPanelRollerIntake = 8;
+static constexpr int hatchPanelRollerExtake = 7;
 static constexpr int extakeTiltDown = 7;
 static constexpr int extakeTiltUp = 8;
 static constexpr int extakeStop = 5;
 static constexpr int extakeLow = 6;
-static constexpr int intakeTiltDown = 8;
-static constexpr int intakeTiltUp = 7;
+static constexpr int extakeHigh = 4;
+static constexpr int intakeTiltDown = 3;
+static constexpr int intakeTiltUp = 1;
 static constexpr int intakeToggle = 2;
 static constexpr int hatchPanelIn = 6;
 static constexpr int hatchPanelOut = 5;

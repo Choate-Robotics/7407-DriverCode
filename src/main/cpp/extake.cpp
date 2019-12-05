@@ -11,8 +11,7 @@ subsystem::Extake::Direction subsystem::Extake::tiltingDirection = STOPPED;
 
 void subsystem::Extake::outSlow()
 {
-    RobotMap::motor::extakeLeft->Set(-0.25);
-    RobotMap::motor::extakeRight->Set(0.25);
+    RobotMap::motor::extake->Set(-0.25);
     this->runningDirection = FORWARD_SLOW;
 }
 
@@ -20,22 +19,19 @@ void subsystem::Extake::outFast()
 {
     if (runningDirection == FORWARD_FAST)
     {
-        RobotMap::motor::extakeLeft->Set(0);
-        RobotMap::motor::extakeRight->Set(0);
+        RobotMap::motor::extake->Set(0);
         this->runningDirection = STOPPED;
     }
     else
     {
-        RobotMap::motor::extakeLeft->Set(-0.5);
-        RobotMap::motor::extakeRight->Set(0.5);
+        RobotMap::motor::extake->Set(-0.5);
         this->runningDirection = FORWARD_FAST;
     }
 }
 
 void subsystem::Extake::stop()
 {
-    RobotMap::motor::extakeLeft->Set(0);
-    RobotMap::motor::extakeRight->Set(0);
+    RobotMap::motor::extake->Set(0);
     this->runningDirection = STOPPED;
 }
 

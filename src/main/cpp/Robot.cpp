@@ -23,8 +23,8 @@ frc::PWMVictorSPX * motor::conveyor;
 frc::PWMVictorSPX * motor::intake;
 frc::PWMVictorSPX * motor::intakeTilt;
 frc::PWMVictorSPX * motor::extakeTilt;
-frc::PWMVictorSPX * motor::extakeLeft;
-frc::PWMVictorSPX * motor::extakeRight;
+frc::PWMVictorSPX * motor::extake;
+frc::PWMVictorSPX * motor::hatchRoller;
 frc::SpeedControllerGroup * motor::left;
 frc::SpeedControllerGroup * motor::right;
 frc::DifferentialDrive * motor::differentialDrive;
@@ -53,8 +53,8 @@ void Robot::RobotInit()
     motor::intake = new frc::PWMVictorSPX{5};
     motor::intakeTilt = new frc::PWMVictorSPX{6};
     motor::extakeTilt = new frc::PWMVictorSPX{7};
-    motor::extakeLeft = new frc::PWMVictorSPX{8};
-    motor::extakeRight = new frc::PWMVictorSPX{9};
+    motor::extake = new frc::PWMVictorSPX{8};
+    motor::hatchRoller = new frc::PWMVictorSPX{9};
 
     motor::left = new frc::SpeedControllerGroup{*motor::frontLeft,*motor::backLeft};
     motor::right = new frc::SpeedControllerGroup{*motor::frontRight,*motor::backRight};

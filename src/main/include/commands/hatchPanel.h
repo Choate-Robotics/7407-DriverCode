@@ -25,4 +25,49 @@ class hatchPanelOut : public frc::Command
     void End() override;
     void Interrupted() override;
 };
+
+class hatchPanelRollerIntake : public frc::Command
+{
+  public:
+    hatchPanelRollerIntake();
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+};
+
+class hatchPanelRollerExtake : public frc::Command
+{
+  public:
+    hatchPanelRollerExtake();
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+};
+
+class hatchPanelRollerHold : public frc::Command
+{
+  public:
+    hatchPanelRollerHold();
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+};
+
+class hatchPanelRollerOff : public frc::Command
+{
+  public:
+    hatchPanelRollerOff();
+    void Initialize() override;
+    void Execute() override;
+    bool IsFinished() override;
+    void End() override;
+    void Interrupted() override;
+};
+
 } // namespace command
