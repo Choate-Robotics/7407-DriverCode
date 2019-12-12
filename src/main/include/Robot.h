@@ -6,12 +6,7 @@
 #include <frc/PWMTalonSRX.h>
 
 #include "OI.h"
-#include "subsystems/conveyor.h"
 #include "subsystems/drivetrain.h"
-#include "subsystems/hatchPanel.h"
-#include "subsystems/intake.h"
-#include "subsystems/extake.h"
-#include "subsystems/climber.h"
 
 class Robot : public frc::TimedRobot
 {
