@@ -27,10 +27,5 @@ public:
   void DisabledInit() override;
   void DisabledPeriodic() override;
   static OI *oi;
-  static subsystem::Conveyor *conveyor;
   static subsystem::Drivetrain *drivetrain;
-  static subsystem::Intake *intake;
-  static subsystem::HatchPanel *hatchPanel;
-  static subsystem::Extake *extake; 
-  static subsystem::Climber *climber;
 };

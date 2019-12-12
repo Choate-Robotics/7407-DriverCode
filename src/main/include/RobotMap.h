@@ -28,26 +28,12 @@ extern frc::PWMTalonSRX * frontLeft;
 extern frc::PWMTalonSRX * frontRight;
 extern frc::PWMTalonSRX * backLeft;
 extern frc::PWMTalonSRX * backRight;
-extern frc::PWMVictorSPX * conveyor;
-extern frc::PWMVictorSPX * intake;
-extern frc::PWMVictorSPX * intakeTilt;
-extern frc::PWMVictorSPX * extakeTilt;
-extern frc::PWMVictorSPX * extake;
-extern frc::PWMVictorSPX * hatchRoller;
 extern frc::SpeedControllerGroup * left;
 extern frc::SpeedControllerGroup * right;
 extern frc::DifferentialDrive * differentialDrive;
 
 
 } // namespace motor
-
-namespace solenoid
-{
-extern frc::DoubleSolenoid * hatchPanel;
-extern frc::DoubleSolenoid * climberFront; 
-extern frc::DoubleSolenoid * climberBack;
-
-} // namespace solenoid
 
 #if CURRENT_DRIVER == ALEX_AND_PETER
 namespace joystick
