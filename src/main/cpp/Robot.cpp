@@ -45,8 +45,6 @@ subsystem::Intake* Robot::intake = nullptr;
 subsystem::HatchPanel* Robot::hatchPanel = nullptr;
 subsystem::Climber* Robot::climber = nullptr;
 
-std::shared_ptr<NetworkTable> table;
-
 void Robot::RobotInit()
 {
 
@@ -79,7 +77,7 @@ void Robot::RobotInit()
     Robot::drivetrain = new subsystem::Drivetrain("Drivetrain");
     Robot::intake = new subsystem::Intake("Intake");
     Robot::hatchPanel = new subsystem::HatchPanel("Hatch Panel");
-    Robot::climber = new subsystem::Climber("Hab Climber");
+    Robot::climber = new subsystem::Climber("Climber");
 
     frc::Scheduler::GetInstance()->RegisterSubsystem(this->drivetrain);
     frc::Scheduler::GetInstance()->RegisterSubsystem(this->conveyor);
@@ -87,21 +85,10 @@ void Robot::RobotInit()
     frc::Scheduler::GetInstance()->RegisterSubsystem(this->intake);
     frc::Scheduler::GetInstance()->RegisterSubsystem(this->hatchPanel);
 
-    table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
 }
 
 void Robot::RobotPeriodic(){
     frc::Scheduler::GetInstance()->Run();
-
-    double targetOffsetAngle_Horizontal = table->GetNumber("tx",0.0);
-    double targetOffsetAngle_Vertical = table->GetNumber("ty",0.0);
-    double targetArea = table->GetNumber("ta",0.0);
-    double targetSkew = table->GetNumber("ts",0.0);
-
-    frc::SmartDashboard::PutNumber("tx", targetOffsetAngle_Horizontal);
-    frc::SmartDashboard::PutNumber("ty", targetOffsetAngle_Vertical);
-    frc::SmartDashboard::PutNumber("ta", targetArea);
-    frc::SmartDashboard::PutNumber("ts", targetSkew);
 }
 void Robot::DisabledInit(){}
 void Robot::DisabledPeriodic(){}
@@ -109,9 +96,13 @@ void Robot::AutonomousInit(){}
 void Robot::AutonomousPeriodic(){
     frc::Scheduler::GetInstance()->Run();
 }
-void Robot::TeleopInit(){}
+void Robot::TeleopInit(){
+}
 void Robot::TeleopPeriodic(){
     frc::Scheduler::GetInstance()->Run();
+
+    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    cout << table->GetNumber("tx", 0.0) << '\n';
 }
 void Robot::TestPeriodic(){}
 
