@@ -24,10 +24,10 @@ namespace RobotMap
 {
 
 namespace motor{
-extern frc::PWMTalonSRX * frontLeft;
-extern frc::PWMTalonSRX * frontRight;
-extern frc::PWMTalonSRX * backLeft;
-extern frc::PWMTalonSRX * backRight;
+extern frc::PWMVictorSPX * frontLeft;
+extern frc::PWMVictorSPX * frontRight;
+extern frc::PWMVictorSPX * backLeft;
+extern frc::PWMVictorSPX * backRight;
 extern frc::SpeedControllerGroup * left;
 extern frc::SpeedControllerGroup * right;
 extern frc::DifferentialDrive * differentialDrive;

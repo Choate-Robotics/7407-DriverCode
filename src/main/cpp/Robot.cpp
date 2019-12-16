@@ -10,10 +10,10 @@ using namespace RobotMap;
 
 OI *Robot::oi = new OI;
 
-frc::PWMTalonSRX * motor::frontLeft;
-frc::PWMTalonSRX * motor::frontRight;
-frc::PWMTalonSRX * motor::backLeft;
-frc::PWMTalonSRX * motor::backRight;
+frc::PWMVictorSPX * motor::frontLeft;
+frc::PWMVictorSPX * motor::frontRight;
+frc::PWMVictorSPX * motor::backLeft;
+frc::PWMVictorSPX * motor::backRight;
 frc::SpeedControllerGroup * motor::left;
 frc::SpeedControllerGroup * motor::right;
 frc::DifferentialDrive * motor::differentialDrive;
@@ -23,10 +23,10 @@ subsystem::Drivetrain* Robot::drivetrain = nullptr;
 void Robot::RobotInit()
 {
 
-    motor::frontLeft = new frc::PWMTalonSRX{0};
-    motor::frontRight = new frc::PWMTalonSRX{1};
-    motor::backLeft = new frc::PWMTalonSRX{2};
-    motor::backRight = new frc::PWMTalonSRX{3};
+    motor::frontLeft = new frc::PWMVictorSPX{1};
+    motor::frontRight = new frc::PWMVictorSPX{2};
+    motor::backLeft = new frc::PWMVictorSPX{3};
+    motor::backRight = new frc::PWMVictorSPX{4};
 
     motor::left = new frc::SpeedControllerGroup{*motor::frontLeft,*motor::backLeft};
     motor::right = new frc::SpeedControllerGroup{*motor::frontRight,*motor::backRight};
@@ -49,6 +49,8 @@ void Robot::AutonomousPeriodic(){
 void Robot::TeleopInit(){}
 void Robot::TeleopPeriodic(){
     frc::Scheduler::GetInstance()->Run();
+
+    // motor::backLeft->Set(0.5);
 }
 void Robot::TestPeriodic(){}
 
