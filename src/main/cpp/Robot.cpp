@@ -5,10 +5,17 @@
 #include <iostream>
 #include <frc/commands/Scheduler.h>
 
+#include <frc/smartdashboard/SmartDashboard.h>
+
+#include "rev/ColorSensorV3.h"
+
+#include "networktables/NetworkTable.h"
+#include "networktables/NetworkTableInstance.h"
+
 using namespace std;
 using namespace RobotMap;
 
-OI *Robot::oi = new OI;
+OI *Robot::oi = new OI; 
 
 frc::PWMVictorSPX * motor::frontLeft;
 frc::PWMVictorSPX * motor::frontRight;
@@ -19,6 +26,11 @@ frc::SpeedControllerGroup * motor::right;
 frc::DifferentialDrive * motor::differentialDrive;
 
 subsystem::Drivetrain* Robot::drivetrain = nullptr;
+
+static constexpr auto i2cPort = frc::I2C::Port::kOnboard;
+
+rev::ColorSensorV3 colorSensor{i2cPort};
+
 
 void Robot::RobotInit()
 {
@@ -39,7 +51,19 @@ void Robot::RobotInit()
 
 void Robot::RobotPeriodic(){
     frc::Scheduler::GetInstance()->Run();
+
+    frc::Color detectedColor = colorSensor.GetColor();
+
+    double IR = colorSensor.GetIR();
+    
+    std::shared_ptr<NetworkTable> table = nt::NetworkTableInstance::GetDefault().GetTable("SmartDashboard");
+    
+    table->PutNumber("Red", detectedColor.red);
+    table->PutNumber("Green", detectedColor.green);
+    table->PutNumber("Blue", detectedColor.blue);
+    table->PutNumber("IR", IR);
 }
+
 void Robot::DisabledInit(){}
 void Robot::DisabledPeriodic(){}
 void Robot::AutonomousInit(){}
